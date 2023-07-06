@@ -8,6 +8,7 @@ import 'package:medics/res/components/dark_button.dart';
 import 'package:medics/res/components/doctor_profile_horizontal.dart';
 import 'package:medics/res/components/payment_detail.dart';
 import 'package:medics/res/constants/constants.dart';
+import 'package:medics/utils/utils.dart';
 import 'package:medics/view_models/controller/home_controller/booking_controller.dart';
 import 'package:medics/view_models/controller/payment_controller/jazzcash_controller.dart';
 import 'package:medics/view_models/controller/payment_controller/payment_controller.dart';
@@ -286,16 +287,15 @@ class BookAppointment extends StatelessWidget {
                                   text: 'Get Appointment',
                                   heightButton: 50,
                                   function: (){
-                                    if(controller.selectedPaymentMethod.value == 0){
+                                    print(controller.selectedPaymentMethod.value);
+                                    if(controller.selectedPaymentMethod.value == "1"){
                                       Get.find<PaymentController>().makePayment(
                                               amount: controller.totalAmount.value,
                                               currency: 'USD');
-                                    }if(controller.selectedPaymentMethod.value == 1){
+                                    }if(controller.selectedPaymentMethod.value == "2"){
+                                      Utils.toastErrorMessage("This Payment Method not set yet");
+                                    }else if (controller.selectedPaymentMethod.value == "3"){
                                       Get.find<JazzCashController>().payWithJazzCash(controller.totalAmount.value);
-                                    }else{
-                                      if (kDebugMode) {
-                                        print('Not set');
-                                      }
                                     }
                                   },
                                 ),
