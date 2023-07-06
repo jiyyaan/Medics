@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -284,12 +285,19 @@ class BookAppointment extends StatelessWidget {
                                 child: DarkButton(
                                   text: 'Get Appointment',
                                   heightButton: 50,
-                                  // function: (){
-                                  //   Get.find<JazzCashController>().payWithJazzCash();
-                                  // },
-                                  function: () => Get.find<PaymentController>().makePayment(
-                                      amount: '41',
-                                      currency: 'USD'),
+                                  function: (){
+                                    if(controller.selectedPaymentMethod.value == 0){
+                                      Get.find<PaymentController>().makePayment(
+                                              amount: controller.totalAmount.value,
+                                              currency: 'USD');
+                                    }if(controller.selectedPaymentMethod.value == 1){
+                                      Get.find<JazzCashController>().payWithJazzCash(controller.totalAmount.value);
+                                    }else{
+                                      if (kDebugMode) {
+                                        print('Not set');
+                                      }
+                                    }
+                                  },
                                 ),
                               ),
                             ],

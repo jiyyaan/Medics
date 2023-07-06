@@ -12,13 +12,13 @@ class JazzCashController extends GetxController {
   var responsePrice;
   Rx<bool> isLoading = false.obs;
 
-  payWithJazzCash() async {
+  payWithJazzCash(String amount) async {
     isLoading.value = true;
     String dateAndTime = DateFormat("yyyyMMddHHmmss").format(DateTime.now());
     String dExpireDate = DateFormat("yyyyMMddHHmmss").format(
         DateTime.now().add(const Duration(days: 1)));
     String tre = "T$dateAndTime";
-    String ppAmount = "500"; // price set
+    String ppAmount = amount; // price set
     String ppBillReference = "billRef";
     String ppDescription = "Description for transaction";
     String ppLanguage = "EN";
