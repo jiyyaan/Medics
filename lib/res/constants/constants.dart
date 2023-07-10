@@ -1,5 +1,5 @@
 class AppConstants {
-  static const double kpaddingLR = 20.0;
+  static const double kpaddingLR = 8.0;
   static const double timeBoxWidth = 2;
   static const double timeBoxHeight = 2;
   static String dollarSign = String.fromCharCodes(Runes('\u0024'));

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
-import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view/onboarding/unboarding_content.dart';
 
@@ -59,77 +58,85 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: content.length,
-                onPageChanged: (int index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
-                itemBuilder: (_, i) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: content.length,
+              onPageChanged: (int index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              itemBuilder: (_, i) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ///Illustrations
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Expanded(
                         child: Image.asset(
                           content[i].image,
                         ),
                       ),
-                      Text(
+                    ),
+                    ///Captions
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
                         content[i].caption,
                         style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  );
-                },
-              ),
+                    ),
+                  ],
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: Row(
-                children: [
-                  Row(
-                    children: Listdots(currentIndex),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      if (currentIndex == content.length - 1) {
-                        Navigator.pushReplacementNamed(context, '/welcome');
-                      }
-                      _pageController.nextPage(
-                          duration: const Duration(seconds: 2),
-                          curve: Curves.fastLinearToSlowEaseIn);
-                    },
-                    child: Container(
-                      width: 60.0,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color: AppColors.kdarkColor,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.arrowRight,
-                          color: Colors.white,
-                        ),
+          ),
+          /// Dot List and Buttons
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            child: Row(
+              children: [
+                /// Dots
+                Row(
+                  children: Listdots(currentIndex),
+                ),
+                const Spacer(),
+                ///Button
+                GestureDetector(
+                  onTap: () {
+                    if (currentIndex == content.length - 1) {
+                      Navigator.pushReplacementNamed(context, '/welcome');
+                    }
+                    _pageController.nextPage(
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.fastLinearToSlowEaseIn);
+                  },
+                  child: Container(
+                    width: 60.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: AppColors.kdarkColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Center(
+                      child: FaIcon(
+                        FontAwesomeIcons.arrowRight,
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

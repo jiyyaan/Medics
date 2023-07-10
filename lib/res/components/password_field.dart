@@ -13,6 +13,7 @@ class PasswordField extends StatelessWidget {
     this.validator,
     this.focusNode,
     this.labelText,
+    this.heightField,
   });
 
   final bool obscText;
@@ -24,54 +25,59 @@ class PasswordField extends StatelessWidget {
   final String? Function(String?)? validator;
   final FocusNode? focusNode;
   final String? labelText;
+  final double? heightField;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      textInputAction: textInputAction,
-      controller: controller,
-      focusNode: focusNode,
-      validator: validator,
-      autovalidateMode: autoValidateMode,
-      obscureText: obscText,
-      cursorColor: Colors.black,
-      showCursor: true,
-      obscuringCharacter: "●",
-      textAlignVertical: TextAlignVertical.center,
-      style: const TextStyle(
-        color: Color(0xff191919),
-      ),
-      decoration: InputDecoration(
-        labelText: labelText,
-        filled: true,
-        fillColor: AppColors.kwhiteSmoke,
-        prefixIcon: const Icon(
-          Icons.lock_outline,
+    return SizedBox(
+      height: heightField,
+      child: TextFormField(
+        textInputAction: textInputAction,
+        controller: controller,
+        focusNode: focusNode,
+        validator: validator,
+        autovalidateMode: autoValidateMode,
+        obscureText: obscText,
+        cursorColor: Colors.black,
+        showCursor: true,
+        obscuringCharacter: "●",
+        textAlignVertical: TextAlignVertical.center,
+        style: const TextStyle(
+          color: Color(0xff191919),
         ),
-        suffixIcon: suffixIcon,
-        hintText: hintText,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            color: Color(0xffcccccc),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
+          labelText: labelText,
+          filled: true,
+          fillColor: AppColors.kwhiteSmoke,
+          prefixIcon: const Icon(
+            Icons.lock_outline,
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            color: AppColors.kdarkColor,
+          suffixIcon: suffixIcon,
+          hintText: hintText,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: Color(0xffcccccc),
+            ),
           ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            color: Colors.red,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: AppColors.kdarkColor,
+            ),
           ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            color: Colors.red,
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: Colors.red,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: Colors.red,
+            ),
           ),
         ),
       ),

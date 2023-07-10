@@ -15,7 +15,9 @@ class ChatDoctor extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dr. Marcus Horizon'),
+        backgroundColor: AppColors.kdarkColor,
+        foregroundColor: AppColors.kwhite,
+        title: const Text('Dr. Marcus Horizon', style: TextStyle(color: AppColors.kwhite),),
         actions: const [
           Align(
             alignment: Alignment.center,
@@ -28,7 +30,7 @@ class ChatDoctor extends StatelessWidget {
             padding: EdgeInsets.only(left: 10),
             child: Icon(Icons.call),
           ),
-          MenuButton(),
+          MenuButton(color: AppColors.kwhite, textColor: AppColors.kblack,),
         ],
       ),
       body: Column(

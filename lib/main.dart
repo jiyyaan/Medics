@@ -10,7 +10,6 @@ import 'package:medics/res/routes/app_routes.dart';
 import 'package:medics/view/splash/splash_screen.dart';
 
 
-
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = AppConstants.stripePublishKey;
@@ -35,6 +34,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       title: 'Medics',
       debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.zoom,
+      transitionDuration: const Duration(milliseconds: 100),
       theme: ThemeData(
         checkboxTheme: CheckboxThemeData(
           checkColor: MaterialStateProperty.all(Colors.white),

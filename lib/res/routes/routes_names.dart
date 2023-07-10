@@ -9,6 +9,7 @@ class RoutesNames{
   static const String forgot = '/forgot';
   static const String createNewPassword = '/createNewPassword';
   static const String signup = '/signup';
+  static const String signupDoctor = '/signupDoctor';
   static const String home = '/home';
   static const String myProfile = '/myProfile';
   static const String booking = '/booking';

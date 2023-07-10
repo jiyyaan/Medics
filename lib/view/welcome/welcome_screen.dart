@@ -84,7 +84,7 @@ class WelcomeScreen extends StatelessWidget {
                 () =>
                     Get.find<WelcomeScreenController>().fingerPrintActive.value
                         ? CustomProgressIndicator(width: width)
-                        : Container(),
+                        : Get.find<WelcomeScreenController>().goToLogin.value ? CustomProgressIndicator(width: width): Container()
               ),
             ),
           ],

@@ -29,10 +29,12 @@ class _DoctorDetailState extends State<DoctorDetail> {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Doctor Detail'),
+        foregroundColor: AppColors.kwhite,
+        backgroundColor: AppColors.kdarkColor,
+        title: const Text('Doctor Detail', style: TextStyle(color: AppColors.kwhite),),
         centerTitle: true,
         actions: const [
-          MenuButton(),
+          MenuButton(color: AppColors.kwhite, textColor: AppColors.kblack,),
         ],
       ),
       body: LayoutBuilder(

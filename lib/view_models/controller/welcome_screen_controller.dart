@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class WelcomeScreenController extends GetxController {
   PageController pageController = PageController(initialPage: 0);
   Rx<bool> fingerPrintActive = false.obs;
+  Rx<bool> goToLogin = false.obs;
   late final LocalAuthentication auth;
 
   @override
@@ -36,7 +37,10 @@ class WelcomeScreenController extends GetxController {
           Get.offNamedUntil(RoutesNames.home, (route) => false);
         });
       } else {
-        Get.toNamed(RoutesNames.login);
+        goToLogin.value = !goToLogin.value;
+        Future.delayed(const Duration(seconds: 2), () {
+          Get.toNamed(RoutesNames.login);
+        });
       }
     } on PlatformException catch (e) {
       print(e);

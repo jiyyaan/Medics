@@ -17,6 +17,12 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Get.offNamedUntil(RoutesNames.welcome, (route) => false);
+          },
+          child: const Icon(Icons.arrow_back),
+        ),
         centerTitle: true,
         title: const Text(
           'Login',

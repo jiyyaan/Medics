@@ -10,17 +10,18 @@ import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/functions.dart';
 import 'package:medics/view/login/login_screen.dart';
-import 'package:medics/view_models/controller/auth_controllers/signup.dart';
+import 'package:medics/view_models/controller/auth_controllers/signup_doctor.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class SignupDoctorScreen extends StatelessWidget {
+  const SignupDoctorScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Signup as a Patient',
+          'Signup as a Doctor',
           style: TextStyle(color: Colors.black),
         ),
         leading: GestureDetector(
@@ -40,8 +41,8 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: InputField(
-                    controller: Get.find<SignupController>().usernameController,
-                    focusNode: Get.find<SignupController>().usernameFocusNode,
+                    controller: Get.find<SignupDoctorController>().usernameController,
+                    focusNode: Get.find<SignupDoctorController>().usernameFocusNode,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -56,13 +57,29 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: InputField(
-                    controller: Get.find<SignupController>().emailController,
-                    focusNode: Get.find<SignupController>().emailFocusNode,
+                    controller: Get.find<SignupDoctorController>().usernameController,
+                    focusNode: Get.find<SignupDoctorController>().usernameFocusNode,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your speciality';
+                      }
+                      return null;
+                    },
+                    labelText: 'Enter Your speciality',
+                    prefixIcon: const Icon(Icons.person_3_outlined),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: InputField(
+                    controller: Get.find<SignupDoctorController>().emailController,
+                    focusNode: Get.find<SignupDoctorController>().emailFocusNode,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (email) =>
-                        email != null && !AppFunctions.isEmail(email)
-                            ? "Enter Valid Email"
-                            : null,
+                    email != null && !AppFunctions.isEmail(email)
+                        ? "Enter Valid Email"
+                        : null,
                     prefixIcon: const Icon(
                       Icons.mail_outline_rounded,
                     ),
@@ -72,8 +89,8 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: InputField(
-                    controller: Get.find<SignupController>().phoneController,
-                    focusNode: Get.find<SignupController>().mobileFocusNode,
+                    controller: Get.find<SignupDoctorController>().phoneController,
+                    focusNode: Get.find<SignupDoctorController>().mobileFocusNode,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (number) {
                       if (number != "" && number != null) {
@@ -94,25 +111,25 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Obx(
-                    () => PasswordField(
+                        () => PasswordField(
                       heightField: 50,
-                      controller: Get.find<SignupController>().passwordController,
-                      focusNode: Get.find<SignupController>().passwordFocusNode,
+                      controller: Get.find<SignupDoctorController>().passwordController,
+                      focusNode: Get.find<SignupDoctorController>().passwordFocusNode,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) => value != null && value.length < 6
                           ? "Enter min. 6 characters"
                           : null,
                       labelText: 'Enter your password',
-                      obscText: Get.find<SignupController>().showPassword.value,
+                      obscText: Get.find<SignupDoctorController>().showPassword.value,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          Get.find<SignupController>().showPassword.value
+                          Get.find<SignupDoctorController>().showPassword.value
                               ? Icons.visibility_off
                               : Icons.visibility,
                         ),
                         onPressed: () {
-                          Get.find<SignupController>().showPassword.value =
-                              !Get.find<SignupController>().showPassword.value;
+                          Get.find<SignupDoctorController>().showPassword.value =
+                          !Get.find<SignupDoctorController>().showPassword.value;
                         },
                       ),
                     ),
@@ -125,18 +142,18 @@ class SignUpScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: Obx(
-                          () => Checkbox(
+                              () => Checkbox(
                             focusNode:
-                                Get.find<SignupController>().checkBoxFocusNode,
+                            Get.find<SignupDoctorController>().checkBoxFocusNode,
                             checkColor: Colors.white,
-                            value: Get.find<SignupController>().isChecked.value,
+                            value: Get.find<SignupDoctorController>().isChecked.value,
                             side: const BorderSide(
                               color: Colors.grey,
                               width: 1.5,
                             ),
                             onChanged: (bool? value) {
-                              Get.find<SignupController>().isChecked.value =
-                                  !Get.find<SignupController>().isChecked.value;
+                              Get.find<SignupDoctorController>().isChecked.value =
+                              !Get.find<SignupDoctorController>().isChecked.value;
                             },
                           ),
                         ),
@@ -155,7 +172,7 @@ class SignUpScreen extends StatelessWidget {
                               TextSpan(
                                 text: 'Terms of Services ',
                                 style:
-                                    const TextStyle(color: AppColors.kdarkColor),
+                                const TextStyle(color: AppColors.kdarkColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushNamed(context, '/terms');
@@ -168,7 +185,7 @@ class SignUpScreen extends StatelessWidget {
                               TextSpan(
                                 text: 'Privacy Policy',
                                 style:
-                                    const TextStyle(color: AppColors.kdarkColor),
+                                const TextStyle(color: AppColors.kdarkColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.push(
@@ -191,7 +208,7 @@ class SignUpScreen extends StatelessWidget {
                   child: DarkButton(
                       text: 'Sign Up',
                       function: () {
-                        Get.find<SignupController>().signupApi(context);
+                        Get.find<SignupDoctorController>().signupApi(context);
                       }),
                 ),
                 Padding(
@@ -219,10 +236,10 @@ class SignUpScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: GestureDetector(
                     onTap: (){
-                      Get.toNamed(RoutesNames.signupDoctor);
+                      Get.toNamed(RoutesNames.signup);
                     },
                     child: const Text(
-                      'Signup as a Doctor',
+                      'Signup as a Patient',
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.kdarkColor,

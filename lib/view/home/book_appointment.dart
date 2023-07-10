@@ -22,6 +22,8 @@ class BookAppointment extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: AppColors.kwhite,
+        backgroundColor: AppColors.kdarkColor,
         title: const Text('Appointment'),
         centerTitle: true,
       ),
@@ -62,7 +64,7 @@ class BookAppointment extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                'Date',
+                                'Date & Time of Appointment',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -124,14 +126,14 @@ class BookAppointment extends StatelessWidget {
                           color: AppColors.klightTeal,
                           thickness: 1.5,
                         ),
-                        /// Reason Heading
+                        /// Your Symptoms Heading
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                'Reason',
+                                'Your Symptoms',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
