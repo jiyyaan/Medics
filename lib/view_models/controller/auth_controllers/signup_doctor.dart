@@ -32,8 +32,9 @@ class SignupDoctorController extends GetxController{
         'user_email': emailController.value.text,
         'user_phone_no': phoneController.value.text,
         'user_password': passwordController.value.text,
+        'user_role': '2'
       };
-      _api.signupApi(data).then((value) {
+      _api.signupDoctorApi(data).then((value) {
         if (value["success"] == "false" && value["userType"] == "email")
         {
           Utils.errorDialog("This email is already registered!");

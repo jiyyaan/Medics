@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view/articles/articles_screen.dart';
+import 'package:medics/view/doctor_profile/doctor_profile.dart';
 import 'package:medics/view/forgotPassword/forgot_password.dart';
 import 'package:medics/view/forgotPassword/new_password.dart';
 import 'package:medics/view/home/book_appointment.dart';
@@ -25,6 +26,7 @@ import 'package:medics/view_models/controller/auth_controllers/login.dart';
 import 'package:medics/view_models/controller/auth_controllers/login_with_google.dart';
 import 'package:medics/view_models/controller/auth_controllers/signup.dart';
 import 'package:medics/view_models/controller/auth_controllers/signup_doctor.dart';
+import 'package:medics/view_models/controller/doctor_profile_controller/doctor_profile_controller.dart';
 import 'package:medics/view_models/controller/home_controller/booking_controller.dart';
 import 'package:medics/view_models/controller/home_controller/doctor_detail_controller.dart';
 import 'package:medics/view_models/controller/home_controller/home_controller.dart';
@@ -86,6 +88,13 @@ class AppRoutes {
           page: () => const SignupDoctorScreen(),
           binding: BindingsBuilder((){
             Get.lazyPut<SignupDoctorController>(() => SignupDoctorController());
+          }),
+        ),
+        GetPage(
+          name: RoutesNames.doctorProfile,
+          page: () => const DoctorProfile(),
+          binding: BindingsBuilder((){
+            Get.lazyPut<DoctorProfileController>(() => DoctorProfileController());
           }),
         ),
         GetPage(

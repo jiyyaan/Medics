@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20, top: 10),
+                  padding: const EdgeInsets.only(top: 20),
                   child: InputField(
                     focusNode: Get.find<LoginController>().usernameFocusNode,
                     controller: Get.find<LoginController>().usernameController,
@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+                  padding: const EdgeInsets.only(top : 20),
                   child: Obx(()=>PasswordField(
                     controller: Get.find<LoginController>().passwordController,
                     focusNode: Get.find<LoginController>().passwordFocusNode,
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AppColors.kdarkColor,
                           fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: AppColors.kdarkColor,
-                            fontSize: 15),
+                            fontSize: 14),
                       ),
                     ),
                   ],

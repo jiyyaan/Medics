@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/routes/routes_names.dart';
-import 'package:medics/utils/functions.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(const Duration(seconds: 3),(){
-      Get.offAllNamed(RoutesNames.onBoarding);
+      // Get.offAllNamed(RoutesNames.onBoarding);
+      Get.offAllNamed(RoutesNames.doctorProfile);
+      // Get.offAllNamed(RoutesNames.messagesDoctor);
     });
   }
   @override

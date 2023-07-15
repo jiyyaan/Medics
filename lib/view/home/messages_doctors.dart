@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
-import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 
@@ -64,6 +62,7 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
         padding: const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
         child: Column(
           children: [
+            /// Change Screen Buttons
             Container(
               width: width,
               height: 45,
@@ -178,49 +177,55 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                 ],
               ),
             ),
+            /// Chat Cards
             Expanded(
               child: Stack(
                 children: [
                   ListView(
                     children: [
-                      Card(
-                        elevation: 0,
-                        child: ListTile(
-                          leading: const CircleAvatar(
-                            radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Marcus.png'),
-                          ),
-                          title: const Text(
-                            'One-line ListTile',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: const Text(
-                            'I don\'t have any fever, but headache',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          trailing: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text('10:40'),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 15,
-                                height: 15,
-                                decoration: BoxDecoration(
-                                  color: AppColors.kdarkColor,
-                                  borderRadius: BorderRadius.circular(50),
+                      GestureDetector(
+                        onTap:(){
+                          Get.toNamed(RoutesNames.chatDoctor);
+                        } ,
+                        child: Card(
+                          elevation: 0,
+                          child: ListTile(
+                            leading: const CircleAvatar(
+                              radius: 20,
+                              backgroundImage: AssetImage('images/Dr.Marcus.png'),
+                            ),
+                            title: const Text(
+                              'One-line ListTile',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: const Text(
+                              'I don\'t have any fever, but headache',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('10:40'),
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                                child: const Center(
-                                  child: Text(
-                                    '1',
-                                    style: TextStyle(color: Colors.white, fontSize: 10),
+                                Container(
+                                  width: 15,
+                                  height: 15,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.kdarkColor,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      '1',
+                                      style: TextStyle(color: Colors.white, fontSize: 10),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -518,40 +523,14 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       ),
                     ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: GestureDetector(
-                        onTap: (){
-                          Get.toNamed(RoutesNames.chatDoctor);
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: AppColors.kdarkColor,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Center(
-                            child: FaIcon(
-                              FontAwesomeIcons.solidCommentDots,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // const ChatIcon(),
                 ],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigation(
-        width: width,
-      ),
     );
   }
 }
+

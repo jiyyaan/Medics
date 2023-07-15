@@ -20,15 +20,12 @@ class LogoutAlert extends StatelessWidget {
           Radius.circular(20.0),
         ),
       ),
-      iconPadding: const EdgeInsets.symmetric(
-        vertical: 50,
-      ),
       icon: Stack(
         alignment: Alignment.center,
         children: [
           Container(
-            width: 100,
-            height: 100,
+            width: 70,
+            height: 70,
             decoration: BoxDecoration(
               color: AppColors.kwhiteSmoke,
               borderRadius: BorderRadius.circular(50),
@@ -41,11 +38,12 @@ class LogoutAlert extends StatelessWidget {
         ],
       ),
       iconColor: AppColors.kdarkColor,
-      title: Text('Are you sure to log out of your account?'),
+      title: const Text('Are you sure to log out of your account?', style: TextStyle(fontSize: 16),),
       actions: [
         Padding(
           padding: const EdgeInsets.only(bottom: 20, left: 50, right: 50),
           child: DarkButton(
+            heightButton: 40,
             text: 'Log Out',
             function: signOutFunction,
           ),
@@ -55,7 +53,7 @@ class LogoutAlert extends StatelessWidget {
           child: Center(
               child: GestureDetector(
                 onTap: cancelFunction,
-                child: Text(
+                child: const Text(
             'Cancel',
             style: TextStyle(
                 color: AppColors.kdarkColor,

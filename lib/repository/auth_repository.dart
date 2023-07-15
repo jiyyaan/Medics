@@ -26,6 +26,16 @@ class AuthRepository {
       rethrow;
     }
   }
+  ///SignupDoctor Repository
+  Future<dynamic> signupDoctorApi(data) async {
+    try {
+      dynamic response =
+      await networkApiService.postApiResponse(AppUrl.signupDoctorUrl, data);
+      return jsonDecode(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
   ///Login with Google Repository
   Future<dynamic> loginWithGoogle(data)async{
     try {

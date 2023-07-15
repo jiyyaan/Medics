@@ -76,10 +76,8 @@ class _OnBoardingState extends State<OnBoarding> {
                     ///Illustrations
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Expanded(
-                        child: Image.asset(
-                          content[i].image,
-                        ),
+                      child: Image.asset(
+                        content[i].image,
                       ),
                     ),
                     ///Captions
@@ -105,7 +103,7 @@ class _OnBoardingState extends State<OnBoarding> {
               children: [
                 /// Dots
                 Row(
-                  children: Listdots(currentIndex),
+                  children: listDots(currentIndex),
                 ),
                 const Spacer(),
                 ///Button
@@ -144,7 +142,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
 List<Widget> dotlist = [];
 double index = 0;
-List<Widget> Listdots(int index) {
+List<Widget> listDots(int index) {
   dotlist = [];
   for (double i = 0; i < content.length; i++) {
     dotlist.add(

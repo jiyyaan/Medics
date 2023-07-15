@@ -50,6 +50,7 @@ class SignUpScreen extends StatelessWidget {
                       return null;
                     },
                     labelText: 'Enter Your name',
+                    hintText: 'Enter Your name',
                     prefixIcon: const Icon(Icons.person_3_outlined),
                   ),
                 ),
@@ -67,6 +68,7 @@ class SignUpScreen extends StatelessWidget {
                       Icons.mail_outline_rounded,
                     ),
                     labelText: 'Enter your email',
+                    hintText: 'Enter your email',
                   ),
                 ),
                 Padding(
@@ -85,7 +87,8 @@ class SignUpScreen extends StatelessWidget {
                       }
                       return null;
                     },
-                    labelText: '03010000000',
+                    labelText: 'Mobile No.',
+                    hintText: '03010000000',
                     keyboardType: TextInputType.phone,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     prefixIcon: const Icon(Icons.phone),
@@ -95,7 +98,6 @@ class SignUpScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: Obx(
                     () => PasswordField(
-                      heightField: 50,
                       controller: Get.find<SignupController>().passwordController,
                       focusNode: Get.find<SignupController>().passwordFocusNode,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -103,6 +105,7 @@ class SignUpScreen extends StatelessWidget {
                           ? "Enter min. 6 characters"
                           : null,
                       labelText: 'Enter your password',
+                      hintText: 'Enter your password',
                       obscText: Get.find<SignupController>().showPassword.value,
                       suffixIcon: IconButton(
                         icon: Icon(

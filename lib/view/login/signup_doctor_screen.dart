@@ -50,23 +50,8 @@ class SignupDoctorScreen extends StatelessWidget {
                       }
                       return null;
                     },
-                    labelText: 'Enter Your name',
-                    prefixIcon: const Icon(Icons.person_3_outlined),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: InputField(
-                    controller: Get.find<SignupDoctorController>().usernameController,
-                    focusNode: Get.find<SignupDoctorController>().usernameFocusNode,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your speciality';
-                      }
-                      return null;
-                    },
-                    labelText: 'Enter Your speciality',
+                    labelText: 'Doctor Name',
+                    hintText: 'Doctor Name',
                     prefixIcon: const Icon(Icons.person_3_outlined),
                   ),
                 ),
@@ -84,6 +69,7 @@ class SignupDoctorScreen extends StatelessWidget {
                       Icons.mail_outline_rounded,
                     ),
                     labelText: 'Enter your email',
+                    hintText: 'Enter your email',
                   ),
                 ),
                 Padding(
@@ -102,7 +88,8 @@ class SignupDoctorScreen extends StatelessWidget {
                       }
                       return null;
                     },
-                    labelText: '03010000000',
+                    hintText: '03010000000',
+                    labelText: 'Mobile no.',
                     keyboardType: TextInputType.phone,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     prefixIcon: const Icon(Icons.phone),
@@ -112,7 +99,6 @@ class SignupDoctorScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: Obx(
                         () => PasswordField(
-                      heightField: 50,
                       controller: Get.find<SignupDoctorController>().passwordController,
                       focusNode: Get.find<SignupDoctorController>().passwordFocusNode,
                       autoValidateMode: AutovalidateMode.onUserInteraction,

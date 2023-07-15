@@ -46,6 +46,7 @@ class LoginController extends GetxController{
         'password': passwordController.value.text,
       };
       _api.loginApi(data).then((value) {
+        print(value);
         if (value["status"] == "false" && value["errorField"] == "password") {
           Utils.errorDialog(value["message"].toString());
           passwordFocusNode.requestFocus();
@@ -54,10 +55,19 @@ class LoginController extends GetxController{
           Utils.errorDialog(value["message"].toString());
           usernameFocusNode.requestFocus();
         }
-        else if (value["status"] == "true" &&
-            value["errorField"] == "[errorField]") {
+        if (value["status"] == "true" &&
+            value["errorField"] == "[errorField]" &&
+            value["userRole"] == "1"
+        ) {
           Utils.successDialog(value["message"].toString());
           Get.offNamedUntil(RoutesNames.home, (route) => false);
+        }
+        else if (value["status"] == "true" &&
+            value["errorField"] == "[errorField]" &&
+            value["userRole"] == "2"
+        ) {
+          Utils.successDialog(value["message"].toString());
+          Get.offNamedUntil(RoutesNames.doctorProfile, (route) => false);
         }
       }).onError((error, stackTrace) {
         if (kDebugMode) {

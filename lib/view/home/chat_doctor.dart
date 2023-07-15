@@ -139,12 +139,12 @@ class ChatDoctor extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: InputField(
-                          prefixIcon: const Icon(Icons.emoji_emotions_outlined),
+                          prefixIcon: Icon(Icons.emoji_emotions_outlined),
                           hintText: 'Type message',
                           heightField: 45,
-                          suffixIcon: const Icon(Icons.attach_file),
+                          suffixIcon: Icon(Icons.attach_file),
                         ),
                       ),
                       Container(
