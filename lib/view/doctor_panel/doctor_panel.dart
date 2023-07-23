@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/chat_icon.dart';
+import 'package:medics/res/components/docto_bottom.dart';
 import 'package:medics/res/components/doctor_drawer.dart';
 import 'package:medics/res/components/notification_icon_with_badge.dart';
 import 'package:medics/res/components/patients_graph.dart';
@@ -13,14 +14,14 @@ import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 
 
-class DoctorProfile extends StatefulWidget {
-  const DoctorProfile({super.key});
+class DoctorPanel extends StatefulWidget {
+  const DoctorPanel({super.key});
 
   @override
-  State<DoctorProfile> createState() => _DoctorProfileState();
+  State<DoctorPanel> createState() => _DoctorPanelState();
 }
 
-class _DoctorProfileState extends State<DoctorProfile> {
+class _DoctorPanelState extends State<DoctorPanel> {
   double left = 0.0;
   double top = 0.0;
   @override
@@ -503,6 +504,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
           ),
         ),
       ),
+      bottomNavigationBar: DoctorBottomNavigation(width: width),
     );
   }
 }

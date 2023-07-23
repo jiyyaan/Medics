@@ -50,11 +50,16 @@ class DoctorDrawer extends StatelessWidget {
           ),
           Column(
             children: [
-              const ListTile(
-                leading: Icon(CupertinoIcons.person_crop_circle_fill, color: AppColors.kdarkColor,),
-                title: Text('My Profile'),
-                trailing: FaIcon(FontAwesomeIcons.angleRight,size: 14,),
-                tileColor: AppColors.kwhite,
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(RoutesNames.doctorProfile);
+                },
+                child: const ListTile(
+                  leading: Icon(CupertinoIcons.person_crop_circle_fill, color: AppColors.kdarkColor,),
+                  title: Text('My Profile'),
+                  trailing: FaIcon(FontAwesomeIcons.angleRight,size: 14,),
+                  tileColor: AppColors.kwhite,
+                ),
               ),
               const SizedBox(height: 3,),
               const ListTile(

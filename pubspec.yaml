@@ -24,6 +24,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_stripe: ^9.2.2
   syncfusion_flutter_charts: ^22.1.38
+  image_picker: ^1.0.1
 
 
 

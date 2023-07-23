@@ -11,6 +11,9 @@ class RoutesNames{
   static const String signup = '/signup';
   static const String signupDoctor = '/signupDoctor';
   static const String home = '/home';
+  static const String doctorFormOne = '/doctorFormOne';
+  static const String doctorFormTwo = '/doctorFormTwo';
+  static const String doctorPanel = '/doctorPanel';
   static const String doctorProfile = '/doctorProfile';
   static const String myProfile = '/myProfile';
   static const String booking = '/booking';

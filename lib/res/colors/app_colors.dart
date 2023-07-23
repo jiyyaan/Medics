@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColors{
   static const Color kdarkColor = Color(0xFF199A8E);
   static const Color kwhiteSmoke = Color(0xfff5f5f5);
@@ -11,6 +13,4 @@ class AppColors{
   static const Color kwhite = Color(0xffffffff);
   static const Color kredColor = Color(0xffFF0000);
   static const Color klightRed = Color(0xffffcccb);
-
-
 }
