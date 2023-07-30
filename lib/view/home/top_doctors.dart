@@ -26,7 +26,7 @@ class _TopDoctorsState extends State<TopDoctors> {
       ),
       body: Obx(()=>ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: Get.find<HomeController>().categoryList.length,
+        itemCount: Get.find<HomeController>().doctorsList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8, left: AppConstants.kpaddingLR, right: AppConstants.kpaddingLR),

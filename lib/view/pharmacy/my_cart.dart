@@ -116,18 +116,18 @@ class _MyCartState extends State<MyCart> {
                               ],
                             ),
                             const Spacer(),
-                            Column(
+                            const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                const FaIcon(
+                                FaIcon(
                                   FontAwesomeIcons.trash,
                                   color: AppColors.klightGrey,
                                   size: 16,
                                 ),
-                                const Spacer(),
+                                Spacer(),
                                 Text(
                                   "${AppConstants.dollarSign}9.99 ",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -219,18 +219,18 @@ class _MyCartState extends State<MyCart> {
                               ],
                             ),
                             const Spacer(),
-                            Column(
+                            const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                const FaIcon(
+                                FaIcon(
                                   FontAwesomeIcons.trash,
                                   color: AppColors.klightGrey,
                                   size: 16,
                                 ),
-                                const Spacer(),
+                                Spacer(),
                                 Text(
                                   "${AppConstants.dollarSign}9.99 ",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -250,12 +250,12 @@ class _MyCartState extends State<MyCart> {
                               fontSize: 16,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 5, top: 10),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 5, top: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   'Sub Total',
                                   style: TextStyle(
                                     color: AppColors.klightGrey,
@@ -264,7 +264,7 @@ class _MyCartState extends State<MyCart> {
                                 ),
                                 Text(
                                   '${AppConstants.dollarSign}25.98',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
                                   ),
@@ -272,14 +272,14 @@ class _MyCartState extends State<MyCart> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
+                          const Padding(
+                            padding: EdgeInsets.only(
                               bottom: 10,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   'Taxes',
                                   style: TextStyle(
                                     color: AppColors.klightGrey,
@@ -288,7 +288,7 @@ class _MyCartState extends State<MyCart> {
                                 ),
                                 Text(
                                   '${AppConstants.dollarSign}1.00',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
                                   ),
@@ -296,12 +296,12 @@ class _MyCartState extends State<MyCart> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
+                                Text(
                                   'Total',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -311,7 +311,7 @@ class _MyCartState extends State<MyCart> {
                                 ),
                                 Text(
                                   '${AppConstants.dollarSign}26.98',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: AppColors.kdarkColor,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
@@ -360,14 +360,14 @@ class _MyCartState extends State<MyCart> {
                         padding: const EdgeInsets.only(top: 20, bottom: 10,),
                         child: Row(
                           children: [
-                            Column(
+                            const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Total', style: TextStyle(color: AppColors.klightGrey, fontSize: 16),),
-                                const SizedBox(height: 5,),
+                                Text('Total', style: TextStyle(color: AppColors.klightGrey, fontSize: 16),),
+                                SizedBox(height: 5,),
                                 Text(
                                   '${AppConstants.dollarSign}26.98',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -384,10 +384,10 @@ class _MyCartState extends State<MyCart> {
                                     builder: (BuildContext context) {
                                       return AlertBox(
                                         title: 'Payment Success',
-                                        desc:
-                                        'Your payment has been successful, you can have a consultation session with your trusted doctor',
+                                        desc: const Text('Your payment has been successful, you can have a consultation session with your trusted doctor',
+                                          style: TextStyle(color: Colors.grey, fontSize: 15),),
                                         buttonTitle: 'Back to Home',
-                                        function: () {
+                                        onTap: () {
                                           Get.toNamed(RoutesNames.pharmacyHome);
                                         },
                                       );

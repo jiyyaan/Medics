@@ -49,7 +49,10 @@ class Utils {
       textColor: AppColors.kredColor,
     );
   }
-
+  /// Close Keyboard
+  static closeKeyboard() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
   static bool isProgressVisible = false;
 
   ///common method for showing progress dialog

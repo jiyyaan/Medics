@@ -1,40 +1,42 @@
 
 import 'dart:convert';
-
 import 'package:medics/data/network/network_api_service.dart';
 import 'package:medics/res/app_urls/app_urls.dart';
 
-class AuthRepository {
+class DoctorPanelRepositories {
   NetworkApiService networkApiService = NetworkApiService();
-  /// Login Repository
-  Future<dynamic> loginApi(data) async {
+
+  ///Doctor Profile Repository
+  Future<dynamic> doctorPanel(data) async {
     try {
       dynamic response =
-          await networkApiService.postApiResponse(AppUrl.loginUrl, data);
+      await networkApiService.postApiResponse(AppUrl.doctorPanel, data);
       return jsonDecode(response);
     } catch (e) {
       rethrow;
     }
   }
-  ///Signup Repository
-  Future<dynamic> signupApi(data) async {
+  ///Doctor Profile Repository
+  Future<dynamic> doctorFormOne(data) async {
     try {
       dynamic response =
-          await networkApiService.postApiResponse(AppUrl.signupUrl, data);
+      await networkApiService.postApiResponse(AppUrl.doctorFormOne, data);
       return jsonDecode(response);
     } catch (e) {
       rethrow;
     }
   }
-  ///Login with Google Repository
-  Future<dynamic> loginWithGoogle(data)async{
+
+  ///Doctor Profile Repository
+  Future<dynamic> getUserRecord(data) async {
     try {
       dynamic response =
-      await networkApiService.postApiResponse(AppUrl.loginWithGoogle, data);
+      await networkApiService.postApiResponse(AppUrl.userRecord, data);
       return jsonDecode(response);
     } catch (e) {
       rethrow;
     }
   }
+
 }
 

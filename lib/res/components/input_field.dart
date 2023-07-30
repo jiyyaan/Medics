@@ -18,6 +18,7 @@ class InputField extends StatelessWidget {
     this.focusNode,
     this.onChanged,
     this.labelText,
+    this.onTap,
   });
   final String? labelText;
   final Widget? prefixIcon;
@@ -32,11 +33,13 @@ class InputField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final FocusNode? focusNode;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: heightField,
       child: TextFormField(
+        onTap: onTap,
         onChanged: onChanged,
         focusNode: focusNode,
         keyboardType: keyboardType,
@@ -63,7 +66,7 @@ class InputField extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: const BorderSide(
-              color: Color(0xffcccccc),
+              color: AppColors.ktextFieldBorderColor,
             ),
           ),
           focusedBorder: OutlineInputBorder(

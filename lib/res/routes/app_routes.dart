@@ -15,7 +15,6 @@ import 'package:medics/view/home/messages_doctors.dart';
 import 'package:medics/view/home/schedule_doctors.dart';
 import 'package:medics/view/home/top_doctors.dart';
 import 'package:medics/view/login/login_screen.dart';
-import 'package:medics/view/login/signup_doctor_screen.dart';
 import 'package:medics/view/login/signup_screen.dart';
 import 'package:medics/view/onboarding/onboarding_screen.dart';
 import 'package:medics/view/payment_methods/credit_debit_card.dart';
@@ -28,7 +27,6 @@ import 'package:medics/view/welcome/welcome_screen.dart';
 import 'package:medics/view_models/controller/auth_controllers/login.dart';
 import 'package:medics/view_models/controller/auth_controllers/login_with_google.dart';
 import 'package:medics/view_models/controller/auth_controllers/signup.dart';
-import 'package:medics/view_models/controller/auth_controllers/signup_doctor.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_one_controller.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_two_controller.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
@@ -87,13 +85,6 @@ class AppRoutes {
           page: () => const SignUpScreen(),
           binding: BindingsBuilder((){
             Get.lazyPut<SignupController>(() => SignupController());
-          }),
-        ),
-        GetPage(
-          name: RoutesNames.signupDoctor,
-          page: () => const SignupDoctorScreen(),
-          binding: BindingsBuilder((){
-            Get.lazyPut<SignupDoctorController>(() => SignupDoctorController());
           }),
         ),
         GetPage(

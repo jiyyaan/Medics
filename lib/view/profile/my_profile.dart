@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:medics/main.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/components/logout_alert.dart';
 import 'package:medics/res/components/menu_button.dart';
+import 'package:medics/res/routes/routes_names.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -254,6 +256,7 @@ class _MyProfileState extends State<MyProfile> {
                           builder: (BuildContext context) {
                             return LogoutAlert(
                               signOutFunction: (){
+                                Get.offNamedUntil(RoutesNames.login, (route) => false);
                               },
                               cancelFunction: (){
                                 navigatorKey.currentState!.pop();

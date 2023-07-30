@@ -3,12 +3,14 @@ class AppUrl {
   static String baseURL = "http://192.168.1.26";
   static String loginUrl = '$baseURL/medics/api/login.php';
   static String signupUrl = '$baseURL/medics/api/sign_up.php';
-  static String signupDoctorUrl = '$baseURL/medics/api/signup_doctor.php';
   static String loginWithGoogle = '$baseURL/medics/api/login_with_google.php';
   static String category = '$baseURL/medics/api/category.php';
   static String doctorProfile = '$baseURL/medics/api/doctor_profile.php';
   static String doctorDetail = '$baseURL/medics/api/doctor_detail.php';
   static String timeTable = '$baseURL/medics/api/time_table.php';
   static String paymentMethod = '$baseURL/medics/api/payment_method.php';
+  static String doctorPanel = '$baseURL/medics/api/doctor_panel.php';
+  static String userRecord = '$baseURL/medics/api/user_record.php';
+  static String doctorFormOne = '$baseURL/medics/api/doctor_form_one.php';
 }
 

@@ -9,12 +9,12 @@ class AlertBox extends StatelessWidget {
     required this.title,
     required this.desc,
     required this.buttonTitle,
-    this.function,
+    this.onTap,
   });
   final String title;
-  final String desc;
+  final Widget desc;
   final String buttonTitle;
-  final function;
+  final onTap;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -42,17 +42,13 @@ class AlertBox extends StatelessWidget {
       ]),
       iconColor: AppColors.kdarkColor,
       title: Text(title),
-      content: Text(
-        desc,
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: Colors.grey, fontSize: 15),
-      ),
+      content: desc,
       actions: [
         Padding(
           padding: const EdgeInsets.only(bottom: 50, left: 50, right: 50),
           child: DarkButton(
             text: buttonTitle,
-            function: function,
+            function: onTap,
           ),
         ),
       ],

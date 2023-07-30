@@ -19,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3),(){
       // Get.offAllNamed(RoutesNames.onBoarding);
-      Get.offAllNamed(RoutesNames.doctorFormTwo);
-      // Get.offAllNamed(RoutesNames.messagesDoctor);
+      Get.offAllNamed(RoutesNames.login);
+      // Get.offAllNamed(RoutesNames.home);
     });
   }
   @override

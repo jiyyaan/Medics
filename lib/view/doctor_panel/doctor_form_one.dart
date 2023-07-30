@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -7,13 +6,23 @@ import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/dark_button.dart';
 import 'package:medics/res/components/input_field_square.dart';
 import 'package:medics/res/constants/constants.dart';
-import 'package:medics/res/routes/routes_names.dart';
-import 'package:medics/view/login/login_screen.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_one_controller.dart';
 
-class DoctorFormOne extends StatelessWidget {
+class DoctorFormOne extends StatefulWidget {
   const DoctorFormOne({super.key});
 
+  @override
+  State<DoctorFormOne> createState() => _DoctorFormOneState();
+}
+
+class _DoctorFormOneState extends State<DoctorFormOne> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // Get.find<DoctorFormOneController>().importantNotice(context);
+  }
   @override
   Widget build(BuildContext context) {
     DoctorFormOneController controller = Get.find<DoctorFormOneController>();
@@ -38,11 +47,11 @@ class DoctorFormOne extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 25),
                 child: Stack(
                   children: [
-                    const CircleAvatar(
+                    Obx(()=>CircleAvatar(
                       radius: 50,
                       backgroundColor: AppColors.kdarkColor,
-                      child: Text('R', style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: AppColors.klightTeal),),
-                    ),
+                      child: Text(controller.nameController.value.text[0].toUpperCase(), style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: AppColors.klightTeal),),
+                    ),),
                     Positioned(
                       right: 0,
                       bottom: 5,
@@ -60,20 +69,27 @@ class DoctorFormOne extends StatelessWidget {
                   ],
                 )
               ),
-              const InputFieldSquare(
-                prefixIcon: Icon(CupertinoIcons.person_crop_circle),
+              InputFieldSquare(
+                prefixIcon: const Icon(CupertinoIcons.person_crop_circle),
                 labelText: 'Doctor Name',
+                controller: controller.nameController,
+                focusNode: controller.nameFocusNode,
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
-                  prefixIcon: Icon(CupertinoIcons.wand_rays),
+                  prefixIcon: const Icon(CupertinoIcons.wand_rays),
                   labelText: 'Speciality',
+                  controller: controller.specialityController,
+                  focusNode: controller.specialityFocusNode,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
+                  controller: controller.genderController,
+                  focusNode: controller.genderFocusNode,
+                  labelText: 'Gender',
                   prefixIcon: Obx(
                         () => Row(
                       children: [
@@ -91,6 +107,7 @@ class DoctorFormOne extends StatelessWidget {
                           groupValue: controller.selectedGender.value,
                           onChanged: (value) {
                             controller.selectedGender.value = value!;
+                            controller.gender.value = "1";
                           },
                         ),
                         const Text('Female'),
@@ -100,6 +117,7 @@ class DoctorFormOne extends StatelessWidget {
                           groupValue: controller.selectedGender.value,
                           onChanged: (value) {
                             controller.selectedGender.value = value!;
+                            controller.gender.value = "0";
                           },
                         ),
                       ],
@@ -107,37 +125,44 @@ class DoctorFormOne extends StatelessWidget {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
-                  prefixIcon: Icon(CupertinoIcons.phone_arrow_down_left),
+                  prefixIcon: const Icon(CupertinoIcons.phone_arrow_down_left),
                   labelText: 'Phone No.',
+                  controller: controller.phoneController,
+                  focusNode: controller.phoneFocusNode,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
-                  controller: controller.dobController,
                   prefixIcon: const Icon(CupertinoIcons.calendar),
                   labelText: 'Date of Birth',
+                  controller: controller.dobController,
+                  focusNode: controller.dobFocusNode,
                   onTap: (){
                     controller.closeKeyboard();
                     controller.selectDate(context);
                   },
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
-                  prefixIcon: Icon(CupertinoIcons.mail),
+                  prefixIcon: const Icon(CupertinoIcons.mail),
                   labelText: 'Email',
+                  controller: controller.emailController,
+                  focusNode: controller.emailFocusNode,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
-                  prefixIcon: Icon(CupertinoIcons.location_solid),
+                  prefixIcon: const Icon(CupertinoIcons.location_solid),
                   labelText: 'Address',
+                  controller: controller.addressController,
+                  focusNode: controller.addressFocusNode,
                 ),
               ),
               Padding(
@@ -146,7 +171,8 @@ class DoctorFormOne extends StatelessWidget {
                   text: 'Save & Next',
                   heightButton: 50,
                   function: (){
-                    Get.toNamed(RoutesNames.doctorFormTwo);
+                    Get.find<DoctorFormOneController>().doctorFormOne(context);
+                    // Get.toNamed(RoutesNames.doctorFormTwo);
                   },
                 ),
               ),

@@ -8,9 +8,7 @@ class CustomProgressIndicator extends StatelessWidget {
     super.key,
     required this.width,
   });
-
   final double width;
-
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/dark_button.dart';
@@ -9,18 +11,23 @@ import 'package:medics/res/components/password_field.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/functions.dart';
+import 'package:medics/utils/utils.dart';
 import 'package:medics/view/login/login_screen.dart';
 import 'package:medics/view_models/controller/auth_controllers/signup.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    SignupController controller = Get.find<SignupController>();
+    double width = MediaQuery.of(context).size.width;
+    double toggleWidth = width - 60;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Signup as a Patient',
+          'Signup',
           style: TextStyle(color: Colors.black),
         ),
         leading: GestureDetector(
@@ -34,11 +41,103 @@ class SignUpScreen extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Form(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Container(
+                    width: width,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: AppColors.kwhiteSmoke,
+                      border: Border.all(color: AppColors.ktextFieldBorderColor),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Obx(()=>Stack(
+                        children: [
+                          AnimatedAlign(
+                            alignment: Alignment(controller.xAlign.value, 0),
+                            duration: const Duration(milliseconds: 300),
+                            child: Container(
+                              width: width * 0.4,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(50.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.xAlign.value =
+                                  controller.leftAlign;
+                              controller.leftColor.value =
+                                  controller.selectedColor;
+                              controller.rightColor.value =
+                                  controller.normalColor;
+                              controller.userRole.value = "1";
+                            },
+                            child: Align(
+                              alignment: const Alignment(-1, 0),
+                              child: Container(
+                                width: toggleWidth * 0.5,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.transparent,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Patient',
+                                    style: TextStyle(
+                                      color: controller.leftColor.value,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.xAlign.value = controller.rightAlign;
+                              controller.rightColor.value = controller.selectedColor;
+                              controller.leftColor.value = controller.normalColor;
+                              controller.userRole.value = "2";
+                            },
+                            child: Align(
+                              alignment: const Alignment(1, 0),
+                              child: Container(
+                                width: toggleWidth * 0.5,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.transparent,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Doctor',
+                                    style: TextStyle(
+                                      color: controller.rightColor.value,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
                   child: InputField(
                     controller: Get.find<SignupController>().usernameController,
                     focusNode: Get.find<SignupController>().usernameFocusNode,
@@ -55,7 +154,64 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 8),
+                  child: InputField(
+                    controller: Get.find<SignupController>().genderController,
+                    focusNode: Get.find<SignupController>().genderFocusNode,
+                    labelText: 'Gender',
+                    prefixIcon: Obx(
+                      () => Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child:
+                                (controller.selectedGender.value == Gender.male)
+                                    ? const FaIcon(FontAwesomeIcons.mars)
+                                    : const FaIcon(FontAwesomeIcons.venus),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 15),
+                            child: Text('Male'),
+                          ),
+                          Radio(
+                            activeColor: AppColors.kdarkColor,
+                            value: Gender.male,
+                            groupValue: controller.selectedGender.value,
+                            onChanged: (value) {
+                              controller.selectedGender.value = value!;
+                              controller.gender.value = "1";
+                            },
+                          ),
+                          const Text('Female'),
+                          Radio(
+                            activeColor: AppColors.kdarkColor,
+                            value: Gender.female,
+                            groupValue: controller.selectedGender.value,
+                            onChanged: (value) {
+                              controller.selectedGender.value = value!;
+                              controller.gender.value = "0";
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: InputField(
+                    controller: Get.find<SignupController>().dobController,
+                    focusNode: Get.find<SignupController>().dobFocusNode,
+                    prefixIcon: const Icon(CupertinoIcons.calendar),
+                    labelText: 'Date of Birth',
+                    onTap: () {
+                      Utils.closeKeyboard();
+                      controller.selectDate(context);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
                   child: InputField(
                     controller: Get.find<SignupController>().emailController,
                     focusNode: Get.find<SignupController>().emailFocusNode,
@@ -72,7 +228,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 8),
                   child: InputField(
                     controller: Get.find<SignupController>().phoneController,
                     focusNode: Get.find<SignupController>().mobileFocusNode,
@@ -95,10 +251,11 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 8),
                   child: Obx(
                     () => PasswordField(
-                      controller: Get.find<SignupController>().passwordController,
+                      controller:
+                          Get.find<SignupController>().passwordController,
                       focusNode: Get.find<SignupController>().passwordFocusNode,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) => value != null && value.length < 6
@@ -122,7 +279,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 8),
                   child: Row(
                     children: [
                       Padding(
@@ -157,8 +314,8 @@ class SignUpScreen extends StatelessWidget {
                             children: <InlineSpan>[
                               TextSpan(
                                 text: 'Terms of Services ',
-                                style:
-                                    const TextStyle(color: AppColors.kdarkColor),
+                                style: const TextStyle(
+                                    color: AppColors.kdarkColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushNamed(context, '/terms');
@@ -170,8 +327,8 @@ class SignUpScreen extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: 'Privacy Policy',
-                                style:
-                                    const TextStyle(color: AppColors.kdarkColor),
+                                style: const TextStyle(
+                                    color: AppColors.kdarkColor),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.push(
@@ -190,8 +347,9 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   child: DarkButton(
+                    heightButton: 50,
                       text: 'Sign Up',
                       function: () {
                         Get.find<SignupController>().signupApi(context);
@@ -215,23 +373,6 @@ class SignUpScreen extends StatelessWidget {
                             },
                         ),
                       ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: GestureDetector(
-                    onTap: (){
-                      Get.toNamed(RoutesNames.signupDoctor);
-                    },
-                    child: const Text(
-                      'Signup as a Doctor',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.kdarkColor,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
-                      ),
                     ),
                   ),
                 ),

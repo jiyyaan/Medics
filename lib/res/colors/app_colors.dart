@@ -13,4 +13,5 @@ class AppColors{
   static const Color kwhite = Color(0xffffffff);
   static const Color kredColor = Color(0xffFF0000);
   static const Color klightRed = Color(0xffffcccb);
+  static const Color ktextFieldBorderColor = Color(0xffcccccc);
 }

@@ -28,7 +28,7 @@ class DoctorProfileModel {
   });
 
   factory DoctorProfileModel.fromJson(Map<String, dynamic> json) => DoctorProfileModel(
-    docProfileId: json["doc_profile_id"],
+    docProfileId: json["doc_id"],
     docName: json["doc_name"],
     docSpeciality: json["doc_speciality"],
     consultationFee: json["consultation_fee"],
@@ -38,7 +38,7 @@ class DoctorProfileModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "doc_profile_id": docProfileId,
+    "doc_id": docProfileId,
     "doc_name": docName,
     "doc_speciality": docSpeciality,
     "consultation_fee": consultationFee,

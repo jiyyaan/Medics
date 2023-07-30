@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
+import 'package:medics/res/components/alert_box.dart';
 import 'package:medics/res/components/dark_button.dart';
 import 'package:medics/res/constants/constants.dart';
-import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view/login/login_screen.dart';
-import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_one_controller.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_two_controller.dart';
 
 class DoctorFormTwo extends StatelessWidget {
   const DoctorFormTwo({super.key});
@@ -20,6 +19,7 @@ class DoctorFormTwo extends StatelessWidget {
         backgroundColor: AppColors.kdarkColor,
         title: const Text('Education Detail', style: TextStyle(color: AppColors.kwhite),),
         foregroundColor: AppColors.kwhite,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
@@ -121,18 +121,18 @@ class DoctorFormTwo extends StatelessWidget {
               children: [
                 Obx(
                       () => Checkbox(
-                    focusNode: Get.find<DoctorFormOneController>()
+                    focusNode: Get.find<DoctorFormTwoController>()
                         .checkBoxFocusNode,
                     checkColor: Colors.white,
                     value:
-                    Get.find<DoctorFormOneController>().isChecked.value,
+                    Get.find<DoctorFormTwoController>().isChecked.value,
                     side: const BorderSide(
                       color: Colors.grey,
                       width: 1.5,
                     ),
                     onChanged: (bool? value) {
-                      Get.find<DoctorFormOneController>().isChecked.value =
-                      !Get.find<DoctorFormOneController>()
+                      Get.find<DoctorFormTwoController>().isChecked.value =
+                      !Get.find<DoctorFormTwoController>()
                           .isChecked
                           .value;
                     },

@@ -37,6 +37,7 @@ class LoginScreen extends StatelessWidget {
           child: Form(
             child: Column(
               children: [
+                ///Enter Your Name
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: InputField(
@@ -56,6 +57,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                ///Enter your password
                 Padding(
                   padding: const EdgeInsets.only(top : 20),
                   child: Obx(()=>PasswordField(
@@ -74,6 +76,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),),
                 ),
+                /// Forgot password
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Align(
@@ -93,12 +96,16 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                /// Login Button
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: DarkButton(text: 'Login', function: (){
-                    Get.find<LoginController>().loginApi();
+                  child: DarkButton(
+                    text: 'Login',
+                    function: (){
+                      Get.find<LoginController>().loginApi();
                   },),
                 ),
+                ///Signup
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -121,6 +128,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                ///OR
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: Text(
@@ -128,6 +136,7 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(color: AppColors.kdarkGrey, fontSize: 16),
                   ),
                 ),
+                /// Signup with google
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: SignInWith(
@@ -138,6 +147,7 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                 ),
+                ///Signup with facebook
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: SignInWith(
@@ -146,6 +156,7 @@ class LoginScreen extends StatelessWidget {
                     function: () {},
                   ),
                 ),
+                /// Signup with apple
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: SignInWith(

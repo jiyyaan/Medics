@@ -12,6 +12,7 @@ import 'package:medics/res/components/patients_graph.dart';
 import 'package:medics/res/components/summary_box.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
 
 
 class DoctorPanel extends StatefulWidget {
@@ -21,9 +22,11 @@ class DoctorPanel extends StatefulWidget {
   State<DoctorPanel> createState() => _DoctorPanelState();
 }
 
+
 class _DoctorPanelState extends State<DoctorPanel> {
   double left = 0.0;
   double top = 0.0;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
