@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:medics/repository/doctor_panel_repo.dart';
 import 'package:medics/res/colors/app_colors.dart';
@@ -22,6 +24,9 @@ class DoctorFormOneController extends GetxController{
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final Rx<bool> isChecked = false.obs;
   Rx<String> gender = ('-1').obs;
+  Rx<bool> isLoading = false.obs;
+  Rx<File?> selectedImage = Rx<File?>(null);
+
 
 
   /// User Record
@@ -161,6 +166,12 @@ class DoctorFormOneController extends GetxController{
       );
     });
   }
+  /// Important Notice Dialogue Box
+  Future pickImage()async{
+    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(returnedImage==null) return;
+    selectedImage.value = File(returnedImage.path);
+  }
   /// Date Selector Method
   Future<String> selectDate(BuildContext context) async {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
@@ -182,6 +193,7 @@ class DoctorFormOneController extends GetxController{
   }
   /// Get user record
   void getUserRecord(){
+    isLoading.value = true;
     Map data = {
       'userID' : userID
     };
@@ -200,9 +212,11 @@ class DoctorFormOneController extends GetxController{
         else if(gender.value == "0"){
           selectedGender.value = Gender.female;
         }
+        isLoading.value = false;
       });
     }catch(e){
       print(e.toString());
+      isLoading.value = false;
     }
   }
   /// Doctor Form One
@@ -276,3 +290,5 @@ class DoctorFormOneController extends GetxController{
     }
   }
 }
+
+
