@@ -9,6 +9,8 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/Theme.AppCompat.Light">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBlvmnofev7RUASyJEErAhh5gCvSJk4QVEs"/>
         
         <activity
             android:name=".MainActivity"

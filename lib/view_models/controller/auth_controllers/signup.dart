@@ -80,7 +80,6 @@ class SignupController extends GetxController {
         'user_role': userRole.value
       };
       _api.signupApi(data).then((value) {
-        print(value);
         if (value["success"] == "false" && value["userType"] == "email")
         {
           Utils.errorDialog("This email is already registered!");

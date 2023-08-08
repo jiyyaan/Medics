@@ -1281,3 +1281,141 @@ class Utils {
 //   }), barrierDismissible: false);
 // }
 }
+/// Important Notice Dialogue Box
+// importantNotice(BuildContext context) {
+//   Future.delayed(Duration.zero, () {
+//     showDialog(
+//       barrierDismissible: false,
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: const Row(
+//             children: [
+//               Icon(
+//                 CupertinoIcons.exclamationmark_triangle_fill,
+//                 color: AppColors.kredColor,
+//               ),
+//               SizedBox(
+//                 width: 8,
+//               ),
+//               Text(
+//                 'Important Notice',
+//                 style: TextStyle(color: AppColors.kredColor),
+//               ),
+//             ],
+//           ),
+//           content: Container(
+//             height: 280,
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 const Padding(
+//                   padding: EdgeInsets.only(top: 8),
+//                   child: Text(
+//                     'All the form fields are compulsory. Upload all required Documents:-',
+//                     style: TextStyle(fontSize: 14),
+//                   ),
+//                 ),
+//                 const Padding(
+//                   padding: EdgeInsets.only(top: 8),
+//                   child: Text(
+//                     '* Resume Cover Letter \n* Resume \n* Experience Letter \n* Last Doctorate Degree',
+//                     style: TextStyle(
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 14,
+//                     ),
+//                   ),
+//                 ),
+//                 const Padding(
+//                   padding: EdgeInsets.only(top: 8),
+//                   child: Text(
+//                     'After submission of application form, you will be interviewed. Interview Letter will be sent to your concerned email.',
+//                     style: TextStyle(
+//                       fontSize: 14,
+//                     ),
+//                   ),
+//                 ),
+//                 Padding(
+//                   padding: const EdgeInsets.only(top: 8),
+//                   child: Row(
+//                     children: [
+//                       // Obx(
+//                       //       () => Checkbox(
+//                       //     focusNode: Get.find<DoctorFormOneController>()
+//                       //         .checkBoxFocusNode,
+//                       //     checkColor: Colors.white,
+//                       //     value: Get.find<DoctorFormOneController>()
+//                       //         .isChecked
+//                       //         .value,
+//                       //     side: const BorderSide(
+//                       //       color: Colors.grey,
+//                       //       width: 1.5,
+//                       //     ),
+//                       //     onChanged: (bool? value) {
+//                       //       Get.find<DoctorFormOneController>()
+//                       //           .isChecked
+//                       //           .value =
+//                       //       !Get.find<DoctorFormOneController>()
+//                       //           .isChecked
+//                       //           .value;
+//                       //     },
+//                       //   ),
+//                       // ),
+//                       Expanded(
+//                         child: RichText(
+//                           maxLines: 2,
+//                           softWrap: true,
+//                           overflow: TextOverflow.visible,
+//                           text: TextSpan(
+//                             text: 'I agree to the medidoc ',
+//                             style: const TextStyle(
+//                               color: Colors.black,
+//                             ),
+//                             children: <InlineSpan>[
+//                               TextSpan(
+//                                 text: 'Terms of Services ',
+//                                 style: const TextStyle(
+//                                     color: AppColors.kdarkColor),
+//                                 recognizer: TapGestureRecognizer()
+//                                   ..onTap = () {},
+//                               ),
+//                               const TextSpan(
+//                                 text: 'and ',
+//                                 style: TextStyle(color: Colors.black),
+//                               ),
+//                               TextSpan(
+//                                 text: 'Privacy Policy',
+//                                 style: const TextStyle(
+//                                     color: AppColors.kdarkColor),
+//                                 recognizer: TapGestureRecognizer()
+//                                   ..onTap = () {},
+//                               )
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           actions: <Widget>[
+//             TextButton(
+//               onPressed: () {
+//                 if (isChecked.value == false) {
+//                   Utils.toastErrorMessage("Please accept Terms of Services");
+//                   checkBoxFocusNode.requestFocus();
+//                 } else {
+//                   Get.back();
+//                 }
+//               },
+//               child: const Text('Ok'),
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   });
+// }

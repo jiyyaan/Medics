@@ -16,7 +16,7 @@ class DoctorPanelRepositories {
       rethrow;
     }
   }
-  ///Doctor Profile Repository
+  ///Doctor Form One Repository
   Future<dynamic> doctorFormOne(data) async {
     try {
       dynamic response =
@@ -26,7 +26,6 @@ class DoctorPanelRepositories {
       rethrow;
     }
   }
-
   ///Doctor Profile Repository
   Future<dynamic> getUserRecord(data) async {
     try {

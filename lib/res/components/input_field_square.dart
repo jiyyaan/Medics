@@ -20,6 +20,9 @@ class InputFieldSquare extends StatelessWidget {
     this.onTap,
     this.labelText,
     this.contentPadding = EdgeInsets.zero,
+    this.minLines,
+    this.maxLines,
+    this.showCursor = true,
   });
   final String? labelText;
   final Widget? prefixIcon;
@@ -36,6 +39,9 @@ class InputFieldSquare extends StatelessWidget {
   final FocusNode? focusNode;
   final void Function(String)? onChanged;
   final void Function()? onTap;
+  final int? minLines;
+  final int? maxLines;
+  final bool? showCursor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,6 +51,8 @@ class InputFieldSquare extends StatelessWidget {
         onChanged: onChanged,
         focusNode: focusNode,
         keyboardType: keyboardType,
+        minLines: minLines,
+        maxLines: maxLines,
         validator: validator,
         autovalidateMode: autoValidateMode,
         controller: controller,
@@ -52,7 +60,7 @@ class InputFieldSquare extends StatelessWidget {
         textAlignVertical: TextAlignVertical.center,
         inputFormatters: inputFormatters,
         cursorColor: Colors.black,
-        showCursor: true,
+        showCursor: showCursor,
         style: const TextStyle(
           color: Color(0xff191919),
         ),
