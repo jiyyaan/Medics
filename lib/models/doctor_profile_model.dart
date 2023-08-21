@@ -16,6 +16,7 @@ class DoctorProfileModel {
   String doctorAbout;
   String docPhoto;
   String docRatings;
+  String docStatus;
 
   DoctorProfileModel({
     required this.docProfileId,
@@ -25,6 +26,7 @@ class DoctorProfileModel {
     required this.doctorAbout,
     required this.docPhoto,
     required this.docRatings,
+    required this.docStatus,
   });
 
   factory DoctorProfileModel.fromJson(Map<String, dynamic> json) => DoctorProfileModel(
@@ -35,6 +37,7 @@ class DoctorProfileModel {
     doctorAbout: json["doctor_about"],
     docPhoto: json["doc_photo"],
     docRatings: json["doc_ratings"],
+    docStatus: json["status"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -45,5 +48,6 @@ class DoctorProfileModel {
     "doctor_about": doctorAbout,
     "doc_photo": docPhoto,
     "doc_ratings": docRatings,
+    "status": docStatus,
   };
 }

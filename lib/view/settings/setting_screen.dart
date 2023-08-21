@@ -27,7 +27,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future currentStatus() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? currentValue = await getBiometric();
+
     prefs.setBool('biometric', currentValue!);
+
     setState(() {
       biometricActive = currentValue;
     });

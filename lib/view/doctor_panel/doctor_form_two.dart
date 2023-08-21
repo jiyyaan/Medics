@@ -1,195 +1,148 @@
-import 'package:flutter/gestures.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
-import 'package:medics/res/components/alert_box.dart';
-import 'package:medics/res/components/dark_button.dart';
+import 'package:medics/res/components/dark_button_square.dart';
+import 'package:medics/res/components/input_field_square.dart';
+import 'package:medics/res/components/time_table_container.dart';
 import 'package:medics/res/constants/constants.dart';
-import 'package:medics/view/login/login_screen.dart';
-import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_two_controller.dart';
+import 'package:medics/utils/utils.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
 
-class DoctorFormTwo extends StatelessWidget {
+class DoctorFormTwo extends StatefulWidget {
   const DoctorFormTwo({super.key});
 
   @override
+  State<DoctorFormTwo> createState() => _DoctorFormTwoState();
+}
+
+class _DoctorFormTwoState extends State<DoctorFormTwo> {
+  @override
   Widget build(BuildContext context) {
+    DoctorPanelController controller = Get.find<DoctorPanelController>();
     return Scaffold(
-      backgroundColor: AppColors.kwhite,
       appBar: AppBar(
         backgroundColor: AppColors.kdarkColor,
-        title: const Text('Education Detail', style: TextStyle(color: AppColors.kwhite),),
-        foregroundColor: AppColors.kwhite,
-        centerTitle: true,
+        title: const Text(
+          'Form-II',
+          style: TextStyle(color: AppColors.kwhite),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Card(
-                child: ListTile(
-                  title: Text(
-                    'Last Degree',
-                    style: TextStyle(fontSize: 14),
+        padding: const EdgeInsets.only(
+            left: AppConstants.kpaddingLR,
+            right: AppConstants.kpaddingLR,
+            top: 16),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.klightTeal,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  subtitle: Text('Upload your Doctorate Degree', style: TextStyle(fontSize: 10),),
-                  trailing: SizedBox(
-                    width: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.file_upload_outlined),
-                        Text('Upload', style: TextStyle(fontSize: 10, color: AppColors.kdarkGrey),),
-                      ],
-                    ),
-                  ),
+                  child: const Text(
+                      'All fields are required.* \nFirst select your duty hours,  '
+                      'on that time you have to be active with your patients.\n'
+                      'Every session will be of 20 minutes'),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Card(
-                child: ListTile(
-                  title: Text(
-                    'Last Degree',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  subtitle: Text('Upload your Doctorate Degree', style: TextStyle(fontSize: 10),),
-                  trailing: SizedBox(
-                    width: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.file_upload_outlined),
-                        Text('Upload', style: TextStyle(fontSize: 10, color: AppColors.kdarkGrey),),
-                      ],
-                    ),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: InputFieldSquare(
+                  prefixIcon: const Icon(CupertinoIcons.money_dollar_circle),
+                  labelText: 'Consultation fee',
+                  controller: controller.feeController,
+                  focusNode: controller.feeFocusNode,
+                  keyboardType: TextInputType.number,
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Card(
-                child: ListTile(
-                  title: Text(
-                    'Last Degree',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  subtitle: Text('Upload your Doctorate Degree', style: TextStyle(fontSize: 10),),
-                  trailing: SizedBox(
-                    width: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.file_upload_outlined),
-                        Text('Upload', style: TextStyle(fontSize: 10, color: AppColors.kdarkGrey),),
-                      ],
-                    ),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: InputFieldSquare(
+                  controller: controller.startingTimeController,
+                  focusNode: controller.startingTimeFocusNode,
+                  prefixIcon: const Icon(CupertinoIcons.time),
+                  labelText: 'Starting Time',
+                  onTap: () {
+                    Utils.closeKeyboard();
+                    controller.startingTime(context);
+                  },
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Card(
-                child: ListTile(
-                  title: Text(
-                    'Last Degree',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  subtitle: Text('Upload your Doctorate Degree', style: TextStyle(fontSize: 10),),
-                  trailing: SizedBox(
-                    width: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.file_upload_outlined),
-                        Text('Upload', style: TextStyle(fontSize: 10, color: AppColors.kdarkGrey),),
-                      ],
-                    ),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: InputFieldSquare(
+                  controller: controller.endingTimeController,
+                  focusNode: controller.endingTimeFocusNode,
+                  prefixIcon: const Icon(CupertinoIcons.time),
+                  labelText: 'Ending Time',
+                  onTap: () {
+                    Utils.closeKeyboard();
+                    controller.endingTime(context);
+                  },
                 ),
               ),
-            ),
-            Row(
-              children: [
-                Obx(
-                      () => Checkbox(
-                    focusNode: Get.find<DoctorFormTwoController>()
-                        .checkBoxFocusNode,
-                    checkColor: Colors.white,
-                    value:
-                    Get.find<DoctorFormTwoController>().isChecked.value,
-                    side: const BorderSide(
-                      color: Colors.grey,
-                      width: 1.5,
-                    ),
-                    onChanged: (bool? value) {
-                      Get.find<DoctorFormTwoController>().isChecked.value =
-                      !Get.find<DoctorFormTwoController>()
-                          .isChecked
-                          .value;
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: RichText(
-                    maxLines: 2,
-                    softWrap: true,
-                    overflow: TextOverflow.visible,
-                    text: TextSpan(
-                      text: 'I agree to the medidoc ',
-                      style: const TextStyle(
-                        color: Colors.black,
+              Align(
+                alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: GestureDetector(
+                      onTap: (){
+                        controller.sessionList.assignAll(controller.calculateSessions(controller.startTime.value, controller.endTime.value),);
+                      },
+                      child: const Text('View Sessions',
+                        style: TextStyle(color: AppColors.kdarkColor, fontSize: 12, fontWeight: FontWeight.bold),
                       ),
-                      children: <InlineSpan>[
-                        TextSpan(
-                          text: 'Terms of Services ',
-                          style: const TextStyle(color: AppColors.kdarkColor),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pushNamed(context, '/terms');
-                            },
-                        ),
-                        const TextSpan(
-                          text: 'and ',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        TextSpan(
-                          text: 'Privacy Policy',
-                          style: const TextStyle(color: AppColors.kdarkColor),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const LoginScreen(),
-                                ),
-                              );
-                            },
-                        )
-                      ],
                     ),
-                  ),
+                  ),),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: DarkButtonSquare(
+                  text: 'Submit',
+                  heightButton: 50,
+                  function: () {
+                  },
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: DarkButton(
-                text: 'Submit',
-                heightButton: 50,
-                function: (){
-                },
               ),
-            ),
-          ],
+              const Divider(
+                thickness: 1.5,
+                height: 50,
+                color: AppColors.klightTeal,
+              ),
+              /// Session List
+              SizedBox(
+                height: 180,
+                child: Obx((){
+                  if(controller.sessionActive.isTrue){
+                    return GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 170,
+                        childAspectRatio: 2.8,
+                        mainAxisSpacing: 4,
+                      ),
+                      itemCount: controller.sessionList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return TimeTableContainer(
+                          timeText: controller.convertTimeTo12HourFormat(controller.sessionList[index], context),
+                          bgColor: AppColors.kwhite,
+                          textColor: AppColors.kblack,
+                          borderColor: AppColors.kdarkTeal,
+                        );
+                      },
+                    );
+                  }else{
+                    return const Text('');
+                  }
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );

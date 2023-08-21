@@ -31,6 +31,41 @@ class Utils {
     }
   }
 
+  // Padding(
+  //   padding: const EdgeInsets.only(top:8.0),
+  //   child: InputDecorator(
+  //     decoration: InputDecoration(
+  //       filled: true,
+  //       fillColor: AppColors.kwhiteSmoke,
+  //       contentPadding: EdgeInsets.zero,
+  //       labelText: 'Select an option',
+  //       prefixIcon: const Icon(Icons.timer_outlined), // Prefix icon
+  //       border: OutlineInputBorder(
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //     ),
+  //     child: DropdownButton<String>(
+  //       value: controller.selectedHours.value == ""
+  //           ? null
+  //           : controller.selectedHours.value,
+  //       isExpanded: true,
+  //       hint: const Text('Select Duty Hours'),
+  //       elevation: 16,
+  //       underline: Container(
+  //       ),
+  //       onChanged: (value) {
+  //         controller.selectedHours.value = value!;
+  //       },
+  //       items: controller.numberOfHours.map((selectedValue) {
+  //         return DropdownMenuItem<String>(
+  //           value: selectedValue,
+  //           child: Text(selectedValue),
+  //         );
+  //       }).toList(),
+  //     ),
+  //   ),
+  // ),
+  //
   static toastMessage(String message) {
     Fluttertoast.showToast(
       msg: message,

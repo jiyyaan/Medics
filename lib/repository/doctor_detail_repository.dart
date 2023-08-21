@@ -17,6 +17,16 @@ class DoctorDetailRepository{
       rethrow;
     }
   }
+  ///Doctor Profile for Doctor Panel
+  Future<List<DoctorProfileModel>> fetchDoctorProfileForDoctorPanel(data) async {
+    try {
+      dynamic response =
+      await networkApiService.postApiResponse(AppUrl.doctorProfileDoctorPanel, data);
+      return doctorProfileModelFromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   /// Doctor Time Table (Schedule)
   Future<List<TimeTableModel>> fetchTimeTable(data) async {

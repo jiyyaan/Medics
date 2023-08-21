@@ -9,8 +9,7 @@ class DoctorProfileController extends GetxController{
 
   Rx<bool> isReadMore = false.obs;
   Rx<bool> isLoading = true.obs;
-  // String doctorID = Get.arguments;
-  String doctorID = "5";
+  String doctorID = Get.arguments;
   Rx<int> timeIndex = (-1).obs;
   Rx<int> dateIndex = (-1).obs;
   Rx<String> selectedDate = ''.obs;
