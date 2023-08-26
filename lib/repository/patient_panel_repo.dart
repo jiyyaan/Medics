@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:medics/data/network/network_api_service.dart';
 import 'package:medics/res/app_urls/app_urls.dart';
 
-class DoctorPanelRepositories {
+class PatientPanelRepositories {
   NetworkApiService networkApiService = NetworkApiService();
 
-  ///Doctor Profile Repository
-  Future<dynamic> doctorPanel(data) async {
+  ///Patient Profile Repository
+  Future<dynamic> patientPanel(data) async {
     try {
       dynamic response =
-      await networkApiService.postApiResponse(AppUrl.doctorPanel, data);
+      await networkApiService.postApiResponse(AppUrl.patientPanel, data);
       return jsonDecode(response);
     } catch (e) {
       rethrow;
     }
   }
   ///Doctor Form One Repository
-  Future<dynamic> doctorFormOne(data) async {
+  Future<dynamic> patientFormOne(data) async {
     try {
       dynamic response =
       await networkApiService.postApiResponse(AppUrl.doctorFormOne, data);
@@ -26,16 +26,7 @@ class DoctorPanelRepositories {
       rethrow;
     }
   }
-  ///Doctor Form Two Repository
-  Future<dynamic> doctorFormTwo(data) async {
-    try {
-      dynamic response =
-      await networkApiService.postApiResponse(AppUrl.doctorFormTwo, data);
-      return jsonDecode(response);
-    } catch (e) {
-      rethrow;
-    }
-  }
+
   ///Doctor Profile Repository
   Future<dynamic> getUserRecord(data) async {
     try {

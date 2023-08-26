@@ -9,10 +9,16 @@ class RoutesNames{
   static const String forgot = '/forgot';
   static const String createNewPassword = '/createNewPassword';
   static const String signup = '/signup';
-  static const String home = '/home';
-  static const String doctorFormOne = '/doctorFormOne';
+
+  /// Doctor Panel LInks
   static const String doctorPanel = '/doctorPanel';
+  static const String doctorFormOne = '/doctorFormOne';
   static const String doctorProfile = '/doctorProfile';
+
+  ///Patient Panel Links
+  static const String patientPanel = '/patientPanel';
+  static const String home = '/home';
+  static const String patientFormOne = '/patientFormOne';
   static const String myProfile = '/myProfile';
   static const String booking = '/booking';
   static const String topDoctors = '/topDoctors';

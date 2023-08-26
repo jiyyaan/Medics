@@ -12,20 +12,8 @@ import 'package:medics/utils/utils.dart';
 import 'package:medics/view/google_map/google_map.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_one_controller.dart';
 
-class DoctorFormOne extends StatefulWidget {
+class DoctorFormOne extends StatelessWidget {
   const DoctorFormOne({super.key});
-
-  @override
-  State<DoctorFormOne> createState() => _DoctorFormOneState();
-}
-
-class _DoctorFormOneState extends State<DoctorFormOne> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    // Get.find<DoctorFormOneController>().importantNotice(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,18 +148,18 @@ class _DoctorFormOneState extends State<DoctorFormOne> {
                         prefixIcon: (controller.selectedFile.value == null)
                             ? const Icon(CupertinoIcons.doc)
                             : const Icon(
-                                CupertinoIcons.doc_checkmark_fill,
-                                color: AppColors.kdarkColor,
-                              ),
+                          CupertinoIcons.doc_checkmark_fill,
+                          color: AppColors.kdarkColor,
+                        ),
                         suffixIcon: (controller.selectedFile.value == null)
                             ? GestureDetector(
                           onTap: (){
                             controller.pickFile();
                           },
-                                child: const Icon(
-                                  Icons.file_upload_outlined,
-                                ),
-                              )
+                          child: const Icon(
+                            Icons.file_upload_outlined,
+                          ),
+                        )
                             : const Icon(
                           Icons.file_upload_outlined,
                           color: AppColors.kdarkColor,

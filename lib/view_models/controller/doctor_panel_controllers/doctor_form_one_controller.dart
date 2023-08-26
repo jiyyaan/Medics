@@ -6,9 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/repository/doctor_panel_repo.dart';
+import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
-
-enum Gender { male, female }
 
 class DoctorFormOneController extends GetxController {
   @override
@@ -20,7 +19,6 @@ class DoctorFormOneController extends GetxController {
 
   final _api = DoctorPanelRepositories();
 
-  final Rx<Gender> selectedGender = Gender.male.obs;
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final Rx<bool> isChecked = false.obs;
   Rx<String> gender = ('-1').obs;
@@ -120,10 +118,10 @@ class DoctorFormOneController extends GetxController {
       _api.doctorFormOne(data).then((value) {
         if (value["success"] == "true") {
           Utils.toastMessage(value["message"]);
-          // Get.toNamed(
-          //   RoutesNames.doctorFormTwo,
-          //   arguments: userID,
-          // );
+          Get.toNamed(
+            RoutesNames.doctorPanel,
+            arguments: userID,
+          );
         } else {
           Utils.toastErrorMessage(value["message"]);
           if (kDebugMode) {

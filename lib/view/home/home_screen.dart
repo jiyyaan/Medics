@@ -12,6 +12,22 @@ import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view_models/controller/home_controller/home_controller.dart';
 
+class PatientPanel extends StatelessWidget {
+  const PatientPanel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    HomeController controller = Get.find<HomeController>();
+    return Scaffold(
+      body: (controller.categoryList.isNotEmpty &&
+              controller.doctorsList.isNotEmpty)
+          ? const HomeScreen()
+          : CustomProgressIndicator(width: width),
+    );
+  }
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -19,11 +35,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    HomeController controller = Get.find<HomeController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: Padding(
-          padding: const EdgeInsets.only(top: 45, left: AppConstants.kpaddingLR, right: AppConstants.kpaddingLR),
+          padding: const EdgeInsets.only(
+              top: 45,
+              left: AppConstants.kpaddingLR,
+              right: AppConstants.kpaddingLR),
           child: AppBar(
             primary: false,
             titleSpacing: 0,
@@ -35,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
-            actions:   const [
+            actions: const [
               Icon(
                 Icons.notifications_none_rounded,
                 size: 35,
@@ -45,203 +65,218 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Obx((){
-      if(Get.find<HomeController>().categoryList.isNotEmpty && Get.find<HomeController>().doctorsList.isNotEmpty){
-        return SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: AppConstants.kpaddingLR),
-            child: Column(
-              children: [
-                ///Searchbar
-                const Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: InputField(
-                    heightField: 40,
-                    prefixIcon: Icon(
-                      Icons.search_sharp,
+      body: Obx(() {
+        if (controller.categoryList.isNotEmpty &&
+            controller.doctorsList.isNotEmpty) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppConstants.kpaddingLR),
+              child: Column(
+                children: [
+                  ///Searchbar
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: InputField(
+                      heightField: 40,
+                      prefixIcon: Icon(
+                        Icons.search_sharp,
+                      ),
+                      hintText: 'Search doctor, drugs, articles...',
                     ),
-                    hintText: 'Search doctor, drugs, articles...',
                   ),
-                ),
-                ///Categories
-                SizedBox(
-                  height: 100,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: Get.find<HomeController>().categoryList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: Category(
-                          catIcon: Get.find<HomeController>().categoryList[index].catIcon.toString(),
-                          catName: Get.find<HomeController>().categoryList[index].catName.toString(),
-                        ),
-                      );
-                    },
+
+                  ///Categories
+                  SizedBox(
+                    height: 100,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.categoryList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Category(
+                            catIcon: controller.categoryList[index].catIcon
+                                .toString(),
+                            catName: controller.categoryList[index].catName
+                                .toString(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                ///Advertisement
-                DisplayAdd(width: width, height: height),
-                ///Top Doctors
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Top Doctor',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RoutesNames.topDoctors);
-                        },
-                        child: const Text(
-                          'see all',
+
+                  ///Advertisement
+                  DisplayAdd(width: width, height: height),
+
+                  ///Top Doctors
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Top Doctor',
                           style: TextStyle(
-                            color: AppColors.kdarkColor,
-                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                ///Doctors
-                SizedBox(
-                  height: 170,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: Get.find<HomeController>().doctorsList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: GestureDetector(
-                          onTap: (){
-                            Get.toNamed(RoutesNames.doctorDetail, arguments: Get.find<HomeController>().doctorsList[index].docProfileId);
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RoutesNames.topDoctors);
                           },
-                          child: DoctorProfileVertical(
-                            imagePath: Get.find<HomeController>().doctorsList[index].docPhoto.toString(),
-                            nameDr: Get.find<HomeController>().doctorsList[index].docName.toString(),
-                            speciality: Get.find<HomeController>().doctorsList[index].docSpeciality,
-                            rating: Get.find<HomeController>().doctorsList[index].docRatings,
-                            distance: '1.5km away',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                ///Health Articles
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Health Article',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RoutesNames.articles);
-                        },
-                        child: const Text(
-                          'see all',
-                          style: TextStyle(
-                            color: AppColors.kdarkColor,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ///Articles
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  width: width,
-                  height: height * 0.1,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.kwhiteSmoke, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          width: 70,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: const DecorationImage(
-                              image: AssetImage('images/medicines.jpg'),
-                              fit: BoxFit.fill,
+                          child: const Text(
+                            'see all',
+                            style: TextStyle(
+                              color: AppColors.kdarkColor,
+                              fontSize: 14,
                             ),
                           ),
                         ),
-                      ),
-                      const Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            children: [
-                              Text(
-                                'The 25 Healthiest Fruits You Can Eat, According to a Nutritionist',
-                                overflow: TextOverflow.visible,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      ],
+                    ),
+                  ),
+
+                  ///Doctors
+                  SizedBox(
+                    height: 170,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: controller.doctorsList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RoutesNames.doctorDetail,
+                                  arguments: controller
+                                      .doctorsList[index].docProfileId);
+                            },
+                            child: DoctorProfileVertical(
+                              imagePath: controller.doctorsList[index].docPhoto
+                                  .toString(),
+                              nameDr: controller.doctorsList[index].docName
+                                  .toString(),
+                              speciality:
+                                  controller.doctorsList[index].docSpeciality,
+                              rating: controller.doctorsList[index].docRatings,
+                              distance: '1.5km away',
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  ///Health Articles
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Health Article',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RoutesNames.articles);
+                          },
+                          child: const Text(
+                            'see all',
+                            style: TextStyle(
+                              color: AppColors.kdarkColor,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  ///Articles
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    width: width,
+                    height: height * 0.1,
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: AppColors.kwhiteSmoke, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            width: 70,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                image: AssetImage('images/medicines.jpg'),
+                                fit: BoxFit.fill,
                               ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    'June 10, 2021 . 5min read',
-                                    overflow: TextOverflow.visible,
-                                    style: TextStyle(
-                                      color: AppColors.kdarkGrey,
-                                      fontSize: 10,
+                            ),
+                          ),
+                        ),
+                        const Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'The 25 Healthiest Fruits You Can Eat, According to a Nutritionist',
+                                  overflow: TextOverflow.visible,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      'June 10, 2021 . 5min read',
+                                      overflow: TextOverflow.visible,
+                                      style: TextStyle(
+                                        color: AppColors.kdarkGrey,
+                                        fontSize: 10,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const Align(
-                        alignment: Alignment.topRight,
-                        child: Icon(
-                          Icons.bookmark_outline_sharp,
-                          color: AppColors.kdarkColor,
-                          size: 20,
+                        const Align(
+                          alignment: Alignment.topRight,
+                          child: Icon(
+                            Icons.bookmark_outline_sharp,
+                            color: AppColors.kdarkColor,
+                            size: 20,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      }else{
-        return CustomProgressIndicator(width: width);
-      }
+          );
+        } else {
+          return CustomProgressIndicator(width: width);
+        }
       }),
       bottomNavigationBar: BottomNavigation(width: width),
     );

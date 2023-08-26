@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/repository/auth_repository.dart';
 import 'package:medics/repository/doctor_panel_repo.dart';
+import 'package:medics/repository/patient_panel_repo.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
 
@@ -11,6 +12,7 @@ class LoginController extends GetxController{
 
   final _api = AuthRepository();
   final _apiDoctorPanel = DoctorPanelRepositories();
+  final _apiPatientPanel = PatientPanelRepositories();
 
   final Rx<bool> showPassword = true.obs;
 
@@ -63,15 +65,15 @@ class LoginController extends GetxController{
               value["errorField"] == "[errorField]" &&
               value["userRole"] == "1"
           ) {
-            Utils.successDialog(value["message"].toString());
-            Get.offNamedUntil(RoutesNames.home, (route) => false);
+            String userID = value["userID"];
+            checkPatientRecord(userID);
           }
           else if (value["status"] == "true" &&
               value["errorField"] == "[errorField]" &&
               value["userRole"] == "2"
           ) {
             String userID = value["userID"];
-            checkRecordDoctor(userID);
+            checkDoctorRecord(userID);
           }
         });
       }catch (e){
@@ -82,7 +84,7 @@ class LoginController extends GetxController{
     }
   }
   ///Check Doctor Record
-  void checkRecordDoctor(String userID) {
+  void checkDoctorRecord(String userID) {
     Map data = {
       'userID': userID
     };
@@ -92,7 +94,28 @@ class LoginController extends GetxController{
           Get.offNamedUntil(RoutesNames.doctorFormOne, arguments: userID, (route) => false);
         }
         else if (value["success"] == "true"){
-          Get.offNamedUntil(RoutesNames.doctorPanel, arguments: userID, (route) => false);
+          Get.offNamedUntil(RoutesNames.doctorPanel, arguments: value["doctorID"], (route) => false);
+        }
+      });
+    }catch (e){
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
+
+  ///Check Doctor Record
+  void checkPatientRecord(String userID) {
+    Map data = {
+      'userID': userID
+    };
+    try{
+      _apiPatientPanel.patientPanel(data).then((value) {
+        if (value["success"] == "false"){
+          Get.offNamedUntil(RoutesNames.patientFormOne, arguments: userID, (route) => false);
+        }
+        else if (value["success"] == "true"){
+          Get.offNamedUntil(RoutesNames.patientPanel, arguments: value["patientID"], (route) => false);
         }
       });
     }catch (e){

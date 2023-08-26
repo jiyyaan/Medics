@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
@@ -8,7 +7,8 @@ import 'package:medics/res/components/input_field_square.dart';
 import 'package:medics/res/components/time_table_container.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/utils/utils.dart';
-import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_two_controller.dart';
+
 
 class DoctorFormTwo extends StatefulWidget {
   const DoctorFormTwo({super.key});
@@ -20,7 +20,7 @@ class DoctorFormTwo extends StatefulWidget {
 class _DoctorFormTwoState extends State<DoctorFormTwo> {
   @override
   Widget build(BuildContext context) {
-    DoctorPanelController controller = Get.find<DoctorPanelController>();
+    DoctorFormTwoController controller = Get.put(DoctorFormTwoController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.kdarkColor,
@@ -94,7 +94,16 @@ class _DoctorFormTwoState extends State<DoctorFormTwo> {
                     padding: const EdgeInsets.only(top: 4.0),
                     child: GestureDetector(
                       onTap: (){
-                        controller.sessionList.assignAll(controller.calculateSessions(controller.startTime.value, controller.endTime.value),);
+                        if(controller.startingTimeController.text==""){
+                          Utils.toastErrorMessage("Please Select Starting Time");
+                          return;
+                        }
+                        if(controller.endingTimeController.text==""){
+                          Utils.toastErrorMessage("Please Select Ending Time");
+                          return;
+                        }else{
+                          controller.sessionList.assignAll(controller.calculateSessions(controller.startTime.value, controller.endTime.value),);
+                        }
                       },
                       child: const Text('View Sessions',
                         style: TextStyle(color: AppColors.kdarkColor, fontSize: 12, fontWeight: FontWeight.bold),
@@ -107,6 +116,7 @@ class _DoctorFormTwoState extends State<DoctorFormTwo> {
                   text: 'Submit',
                   heightButton: 50,
                   function: () {
+                    controller.doctorFormTwo(context);
                   },
                 ),
               ),

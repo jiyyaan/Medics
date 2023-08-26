@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +9,10 @@ import 'package:medics/res/components/chat_icon.dart';
 import 'package:medics/res/components/custom_progress_indicator.dart';
 import 'package:medics/res/components/docto_bottom.dart';
 import 'package:medics/res/components/doctor_drawer.dart';
-import 'package:medics/res/components/logout_alert.dart';
 import 'package:medics/res/components/notification_icon_with_badge.dart';
 import 'package:medics/res/components/patients_graph.dart';
 import 'package:medics/res/components/summary_box.dart';
 import 'package:medics/res/constants/constants.dart';
-import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view/doctor_panel/doctor_form_two.dart';
 import 'package:medics/view/doctor_panel/interview_message.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
@@ -39,7 +36,6 @@ class DoctorPanel extends StatelessWidget {
     );
   }
 }
-
 
 class DoctorPanelHome extends StatelessWidget {
   const DoctorPanelHome({super.key});
