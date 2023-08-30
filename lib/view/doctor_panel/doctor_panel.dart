@@ -25,14 +25,15 @@ class DoctorPanel extends StatelessWidget {
     DoctorPanelController controller = Get.find<DoctorPanelController>();
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: controller.doctorDetail.isEmpty
+      body: Obx(()=>controller.doctorDetail.isEmpty
           ? CustomProgressIndicator(width: width)
           : (controller.doctorDetail[0].docStatus == "0")
-              ? const InterviewMessage()
-              : (controller.doctorDetail[0].consultationFee == "0" ||
-                      controller.doctorDetail[0].consultationFee == "")
-                  ? const DoctorFormTwo()
-                  : const DoctorPanelHome(),
+          ? const InterviewMessage()
+          : (controller.doctorDetail[0].consultationFee == "0" ||
+          controller.doctorDetail[0].consultationFee == "")
+          ? const DoctorFormTwo()
+          : const DoctorPanelHome(),
+      ),
     );
   }
 }

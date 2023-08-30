@@ -16,6 +16,9 @@ class InterviewMessage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.kdarkColor,
         title: const Text('Interview Message',style: TextStyle(color: AppColors.kwhite),),
+        iconTheme: const IconThemeData(
+          color: AppColors.kwhite,
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),

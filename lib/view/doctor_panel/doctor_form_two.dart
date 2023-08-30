@@ -6,7 +6,10 @@ import 'package:medics/res/components/dark_button_square.dart';
 import 'package:medics/res/components/input_field_square.dart';
 import 'package:medics/res/components/time_table_container.dart';
 import 'package:medics/res/constants/constants.dart';
+import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
+import 'package:medics/view/doctor_panel/doctor_panel.dart';
+import 'package:medics/view/login/login_screen.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_two_controller.dart';
 
 

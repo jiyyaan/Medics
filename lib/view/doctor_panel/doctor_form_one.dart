@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,6 +72,14 @@ class DoctorFormOne extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 controller.pickImage();
+                                // if(controller.state.value == AppState.free){
+                                //   controller.pickImage();
+                                // }
+                                // if(controller.state.value == AppState.picked){
+                                //   controller.cropImage();
+                                // }else if(controller.state.value == AppState.cropped){
+                                //   controller.clearImage();
+                                // }
                               },
                               child: Container(
                                 width: 30,
@@ -117,11 +124,10 @@ class DoctorFormOne extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8),
                       child: InputFieldSquare(
                         contentPadding: const EdgeInsets.all(10),
-                        labelText: 'About',
                         hintText: 'Write a paragraph about your speciality...',
                         keyboardType: TextInputType.multiline,
                         showCursor: false,
-                        minLines: 1,
+                        minLines: 6,
                         maxLines: 12,
                         controller: controller.aboutController,
                         focusNode: controller.aboutFocusNode,
@@ -178,7 +184,6 @@ class DoctorFormOne extends StatelessWidget {
                         text: 'Submit',
                         heightButton: 50,
                         function: () {
-                          // controller.aboutController.text = controller.sampleString;
                           controller.doctorFormOne(context);
                         },
                       ),

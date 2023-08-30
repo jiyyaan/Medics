@@ -19,6 +19,7 @@ class HomeController extends GetxController{
     fetchDoctorProfile();
     fetchCategory();
   }
+
   void fetchCategory()async{
     try{
       isLoading(true);

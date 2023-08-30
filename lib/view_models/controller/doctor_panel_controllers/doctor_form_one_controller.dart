@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:medics/repository/doctor_panel_repo.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
+
 
 class DoctorFormOneController extends GetxController {
   @override
@@ -29,8 +31,6 @@ class DoctorFormOneController extends GetxController {
   Rx<String> ImageBase64 = "".obs;
   Rx<String> FileBase64 = "".obs;
 
-  String sampleString =
-      "As a Cardiologist, I am dedicated to helping individuals navigate their emotional and mental well-being. With years of experience in the field, I have honed my skills in providing compassionate care and guidance to those in need. My profile reflects a deep understanding of various psychological theories and therapeutic approaches, enabling me to tailor treatment plans to suit each individual's unique needs. Through evidence-based practices, I foster a safe and non-judgmental environment where clients can explore their thoughts, feelings, and behaviors. I am passionate about empowering individuals to develop healthier coping mechanisms, build resilience, and achieve personal growth. By fostering a collaborative and trusting therapeutic relationship, I strive to support my clients on their journey towards emotional wellness and a fulfilling life.";
 
   /// User Record
   final String userID = Get.arguments;
@@ -46,23 +46,45 @@ class DoctorFormOneController extends GetxController {
   final FocusNode addressFocusNode = FocusNode();
   final FocusNode checkBoxFocusNode = FocusNode();
 
-
   /// Pick Image
   void pickImage() async {
     FilePickerResult? returnedFile = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: [
-        'jpg','png','jpeg'
-      ],
+      allowedExtensions: ['jpg', 'png', 'jpeg'],
     );
     if (returnedFile != null) {
       selectedImage.value = File(returnedFile.files.single.path!);
-      Uint8List imagebytes = await selectedImage.value!.readAsBytes();
-      ImageBase64.value = base64.encode(imagebytes);
+      cropImage();
     } else {
       return;
     }
   }
+
+  /// Image Cropper
+  Future cropImage() async {
+    if (selectedImage.value != null) {
+      CroppedFile? cropped = await ImageCropper().cropImage(
+          sourcePath: selectedImage.value!.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+          ],
+          uiSettings: [
+            AndroidUiSettings(
+                toolbarTitle: 'Crop',
+                cropGridColor: Colors.black,
+                initAspectRatio: CropAspectRatioPreset.original,
+                lockAspectRatio: false),
+            IOSUiSettings(title: 'Crop')
+          ]);
+
+      if (cropped != null) {
+        selectedImage.value = File(cropped.path);
+        Uint8List imageBytes = await selectedImage.value!.readAsBytes();
+        ImageBase64.value = base64.encode(imageBytes);
+      }
+    }
+  }
+
   /// Pick File
   void pickFile() async {
     FilePickerResult? returnedFile = await FilePicker.platform.pickFiles(
@@ -75,17 +97,12 @@ class DoctorFormOneController extends GetxController {
       selectedFile.value = File(returnedFile.files.single.path!);
       fileName.value = returnedFile.files.first;
       Uint8List? fileBytes = await selectedFile.value!.readAsBytes();
-      if (kDebugMode) {
-        print(fileBytes);
-      }
       FileBase64.value = base64.encode(fileBytes);
-      if (kDebugMode) {
-        print(FileBase64.value);
-      }
     } else {
       return;
     }
   }
+
   /// Get user record
   void getUserRecord() {
     isLoading.value = true;
@@ -103,6 +120,7 @@ class DoctorFormOneController extends GetxController {
       isLoading.value = false;
     }
   }
+
   /// Doctor Form One
   void doctorFormOne(BuildContext context) {
     bool? fields = isFieldEmpty();
@@ -120,7 +138,7 @@ class DoctorFormOneController extends GetxController {
           Utils.toastMessage(value["message"]);
           Get.toNamed(
             RoutesNames.doctorPanel,
-            arguments: userID,
+            arguments: value["doctorID"],
           );
         } else {
           Utils.toastErrorMessage(value["message"]);

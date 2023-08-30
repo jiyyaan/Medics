@@ -25,6 +25,7 @@ dependencies:
   flutter_stripe: ^9.2.2
   syncfusion_flutter_charts: ^22.1.38
   file_picker: ^5.3.3
+  image_cropper: ^5.0.0
   google_maps_flutter: ^2.4.0
 
 dev_dependencies:

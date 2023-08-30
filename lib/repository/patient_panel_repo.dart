@@ -20,7 +20,7 @@ class PatientPanelRepositories {
   Future<dynamic> patientFormOne(data) async {
     try {
       dynamic response =
-      await networkApiService.postApiResponse(AppUrl.doctorFormOne, data);
+      await networkApiService.postApiResponse(AppUrl.patientFormOne, data);
       return jsonDecode(response);
     } catch (e) {
       rethrow;

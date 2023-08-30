@@ -106,7 +106,7 @@ class PatientFormOne extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
                   prefixIcon: const Icon(CupertinoIcons.arrow_up_down),
-                  labelText: 'Height',
+                  labelText: 'Height (in inches)',
                   controller: controller.heightController,
                   focusNode: controller.heightFocusNode,
                   keyboardType: TextInputType.number,
@@ -116,7 +116,7 @@ class PatientFormOne extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: InputFieldSquare(
                   prefixIcon: const Icon(Icons.monitor_weight_outlined),
-                  labelText: 'Weight',
+                  labelText: 'Weight (in kg)',
                   controller: controller.weightController,
                   focusNode: controller.weightFocusNode,
                   keyboardType: TextInputType.number,

@@ -20,10 +20,10 @@ class PatientPanel extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     HomeController controller = Get.find<HomeController>();
     return Scaffold(
-      body: (controller.categoryList.isNotEmpty &&
-              controller.doctorsList.isNotEmpty)
+      body: Obx(()=>(controller.categoryList.isNotEmpty &&
+          controller.doctorsList.isNotEmpty)
           ? const HomeScreen()
-          : CustomProgressIndicator(width: width),
+          : CustomProgressIndicator(width: width),),
     );
   }
 }

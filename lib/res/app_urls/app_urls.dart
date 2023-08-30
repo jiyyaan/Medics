@@ -26,5 +26,8 @@ class AppUrl {
   ///Doctors Assets
   static String doctorPictures = '$baseURL/medics/assets/doctors/display_pictures/';
   static String resume = '$baseURL/medics/assets/doctors/resume/';
+
+  ///Patient Assets
+  static String patientPictures = '$baseURL/medics/assets/patients/display_pictures/';
 }
 

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:medics/repository/patient_panel_repo.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
@@ -21,7 +22,7 @@ class PatientFormOneController extends GetxController {
   Rx<bool> isLoading = false.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
   Rx<String> imageBase64 = "".obs;
-
+  Rx<String> ImageBase64 = "".obs;
   /// User Record
   final String userID = Get.arguments;
 
@@ -41,16 +42,38 @@ class PatientFormOneController extends GetxController {
   void pickImage() async {
     FilePickerResult? returnedFile = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: [
-        'jpg','png','jpeg'
-      ],
+      allowedExtensions: ['jpg', 'png', 'jpeg'],
     );
     if (returnedFile != null) {
       selectedImage.value = File(returnedFile.files.single.path!);
-      Uint8List imagebytes = await selectedImage.value!.readAsBytes();
-      imageBase64.value = base64.encode(imagebytes);
+      cropImage();
     } else {
       return;
+    }
+  }
+
+  /// Image Cropper
+  Future cropImage() async {
+    if (selectedImage.value != null) {
+      CroppedFile? cropped = await ImageCropper().cropImage(
+          sourcePath: selectedImage.value!.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+          ],
+          uiSettings: [
+            AndroidUiSettings(
+                toolbarTitle: 'Crop',
+                cropGridColor: Colors.black,
+                initAspectRatio: CropAspectRatioPreset.original,
+                lockAspectRatio: false),
+            IOSUiSettings(title: 'Crop')
+          ]);
+
+      if (cropped != null) {
+        selectedImage.value = File(cropped.path);
+        Uint8List imageBytes = await selectedImage.value!.readAsBytes();
+        ImageBase64.value = base64.encode(imageBytes);
+      }
     }
   }
 
@@ -85,11 +108,12 @@ class PatientFormOneController extends GetxController {
         'address': addressController.value.text
       };
       _api.patientFormOne(data).then((value) {
+        print(value);
         if (value["success"] == "true") {
           Utils.toastMessage(value["message"]);
           Get.toNamed(
-            RoutesNames.doctorPanel,
-            arguments: userID,
+            RoutesNames.patientPanel,
+            arguments: value["patientID"],
           );
         } else {
           Utils.toastErrorMessage(value["message"]);

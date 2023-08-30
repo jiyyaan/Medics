@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/repository/doctor_panel_repo.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
-
 
 class DoctorFormTwoController extends GetxController{
   final String doctorID = Get.arguments;
@@ -22,7 +20,6 @@ class DoctorFormTwoController extends GetxController{
 
   /// All Variables for Time Calculation
   Rx<TimeOfDay> startTime = Rx<TimeOfDay>(TimeOfDay.now());
-
   Rx<TimeOfDay> endTime = Rx<TimeOfDay>(TimeOfDay.now());
   Rx<bool> sessionActive = false.obs;
   RxList<String> sessionList = <String>[].obs;
@@ -76,11 +73,8 @@ class DoctorFormTwoController extends GetxController{
     return sessions;
   }
 
-
-
   /// Function for Sending Second Form Data into Database
   void doctorFormTwo(BuildContext context) {
-
     String startTime24Hour = '${startTime.value.hour.toString().padLeft(2, '0')}:${startTime.value.minute.toString().padLeft(2, '0')}';
     String endTime24Hour = '${endTime.value.hour.toString().padLeft(2, '0')}:${endTime.value.minute.toString().padLeft(2, '0')}';
 
@@ -94,14 +88,13 @@ class DoctorFormTwoController extends GetxController{
       };
       _api.doctorFormTwo(data).then((value) {
         if (value["success"] == "true") {
-          Get.toNamed(RoutesNames.doctorPanel);
+          Get.toNamed(
+            RoutesNames.doctorPanel,
+            arguments: doctorID,
+          );
           print(value["message"]);
         } else {
-          print(value["message"]);
           Utils.toastErrorMessage(value["message"]);
-          if (kDebugMode) {
-            print(value["message"]);
-          }
         }
       }).onError((error, stackTrace) {
         Utils.showSnackBar(context, error.toString());

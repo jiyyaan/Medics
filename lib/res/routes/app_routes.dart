@@ -9,7 +9,7 @@ import 'package:medics/view/forgotPassword/new_password.dart';
 import 'package:medics/view/home/book_appointment.dart';
 import 'package:medics/view/home/chat_doctor.dart';
 import 'package:medics/view/home/doctor_detail.dart';
-import 'package:medics/view/home/home_screen.dart';
+import 'package:medics/view/home/patient_panel.dart';
 import 'package:medics/view/home/messages_doctors.dart';
 import 'package:medics/view/home/patient_form_one.dart';
 import 'package:medics/view/home/schedule_doctors.dart';
