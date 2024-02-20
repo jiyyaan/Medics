@@ -1,46 +1,57 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/models/booking_data.dart';
 import 'package:medics/models/doctor_profile_model.dart';
+import 'package:medics/models/patient_profile_model.dart';
 import 'package:medics/models/payment_method_model.dart';
-import 'package:medics/repository/doctor_detail_repository.dart';
+import 'package:medics/repository/doctor_panel_repo.dart';
+import 'package:medics/repository/patient_panel_repo.dart';
 import 'package:medics/repository/payment_method_repository.dart';
-
+import 'package:medics/res/app_urls/app_urls.dart';
+import 'package:medics/res/routes/routes_names.dart';
+import 'package:medics/utils/utils.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/home_controller.dart';
 
 class BookingController extends GetxController{
 
-  final DoctorDetailRepository _doctorDetail = DoctorDetailRepository();
+  final DoctorPanelRepositories _doctorDetail = DoctorPanelRepositories();
+  final PatientPanelRepositories _api = PatientPanelRepositories();
   final PaymentRepository _payMethod = PaymentRepository();
 
   final BookingModel bookingModel = Get.arguments;
-  Rx<String> dateTime = "".obs;
+  var patientID = Get.find<HomeController>().patientDetail[0].patientId;
   Rx<bool> isLoading = true.obs;
   final totalAmount = ''.obs;
-  Rx<String> reason = "Tell me about your discomfort...".obs;
-  TextEditingController textController = TextEditingController();
+  Rx<String> symptoms = "".obs;
   List<DoctorProfileModel> doctorDetail = <DoctorProfileModel>[].obs;
+  List<PatientProfileModel> patientDetail = <PatientProfileModel>[].obs;
+
+
+  final TextEditingController symptomsController = TextEditingController();
+  final FocusNode symptomsFocusNode = FocusNode();
+
 
   /// Variable for Payment Method
   List<PaymentMethodModel> paymentMethodList = <PaymentMethodModel>[].obs;
   var selectedPaymentMethod = "0".obs;
   Rx<List<DropdownMenuItem<String>>> dropDownItems = Rx<List<DropdownMenuItem<String>>>([]);
 
-
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    textController.text = reason.value;
     fetchDoctorDetail();
-    fetchPayamentMethods();
+    fetchPaymentMethods();
   }
+
   /// Payment Detail Method
   double paymentTotal({required double consultation, required double addlDiscount, required double adminFee}){
     var total = ((consultation) - (addlDiscount) + (adminFee));
     return total;
   }
   /// Get Payment Methods
-  void fetchPayamentMethods()async{
+  void fetchPaymentMethods()async{
     try{
       isLoading(true);
       var responseData = await _payMethod.fetchPaymentMethods();
@@ -62,7 +73,7 @@ class BookingController extends GetxController{
                 SizedBox(
                   width: 45,
                   height: 20,
-                  child: Image.asset('assets/icons/${model.payIcon.toString()}',fit: BoxFit.contain,),
+                  child: Image.network('${AppUrl.logos}${model.payIcon.toString()}',fit: BoxFit.contain,),
                 ),
               ],
             ),
@@ -86,6 +97,44 @@ class BookingController extends GetxController{
     }
     finally{
       isLoading(false);
+    }
+  }
+
+
+  /// Get Appointment Method
+  getAppointment(BuildContext context){
+    if (symptomsController.value.text == "") {
+      Utils.toastErrorMessage("Please write something why are you discomfort.");
+      symptomsFocusNode.requestFocus();
+      return false;
+    }
+    if(selectedPaymentMethod.value == "0" || selectedPaymentMethod.value == ""){
+      Utils.toastErrorMessage("Please select payment method");
+      return false;
+    } else{
+      Map data = {
+        'patientID': patientID,
+        'doctorID': doctorDetail[0].docProfileId,
+        'date': bookingModel.dateAppointment,
+        'timeID': bookingModel.timeID,
+        'symptoms': symptomsController.text,
+        'consultFee': totalAmount.value,
+        'payMethodID': selectedPaymentMethod.value,
+      };
+      _api.bookAppointment(data).then((value) {
+        if (value["success"] == "true") {
+          Utils.successDialog("Your appointment has been locked Successfully!", onclick: () {
+            Get.offNamedUntil(RoutesNames.patientPanel, arguments: patientID, (route) => false);
+          });
+        } else {
+          Utils.toastErrorMessage(value["message"]);
+          if (kDebugMode) {
+            print(value["message"]);
+          }
+        }
+      }).onError((error, stackTrace) {
+        Utils.showSnackBar(context, error.toString());
+      });
     }
   }
 }

@@ -28,7 +28,7 @@ class SentMessage extends StatelessWidget {
               child: CircleAvatar(
                 radius: 20,
                 backgroundColor: AppColors.klightTeal,
-                backgroundImage: AssetImage(
+                backgroundImage: NetworkImage(
                   imagePath,
                 ),
               ),

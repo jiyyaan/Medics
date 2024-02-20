@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medics/res/colors/app_colors.dart';
+import 'package:medics/res/constants/constants.dart';
 
 class DarkButton extends StatelessWidget {
   DarkButton({
@@ -22,7 +23,7 @@ class DarkButton extends StatelessWidget {
         height: heightButton,
         decoration: BoxDecoration(
             color: AppColors.kdarkColor,
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusAll),
             border: Border.all(color: AppColors.kdarkColor, width: 2.0)
         ),
         child: Center(

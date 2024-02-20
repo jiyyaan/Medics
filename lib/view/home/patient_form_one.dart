@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,7 @@ import 'package:medics/res/components/dark_button_square.dart';
 import 'package:medics/res/components/input_field_square.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/utils/utils.dart';
-import 'package:medics/view_models/controller/home_controller/patient_form_one_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/patient_form_one_controller.dart';
 
 class PatientFormOne extends StatelessWidget {
   const PatientFormOne({super.key});

@@ -57,9 +57,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: DoctorProfileHorizontal(
-                              imagePath: Get.find<DoctorProfileController>()
-                                  .doctorDetail[0]
-                                  .docPhoto,
+                              imagePath: NetworkImage(controller.doctorDetail[0].docPhoto),
                               drName: Get.find<DoctorProfileController>()
                                   .doctorDetail[0]
                                   .docName,
@@ -152,6 +150,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                     onTap: () {
                                       controller.dateIndex.value = index;
                                       controller.selectedDate.value = controller.datesList[index]['selectedDate'];
+                                      controller.timeID.value = controller.timeList[index].timeId;
                                     },
                                     child: GetBuilder<DoctorProfileController>(
                                       builder: (controller) => Obx(
@@ -294,6 +293,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                         controller.selectedDate.value,
                                         timeAppointment:
                                         controller.selectedTime.value,
+                                        timeID: controller.timeID.value,
                                       );
                                       if (booking.dateAppointment.isEmpty){
                                         Utils.toastErrorMessage('Please Select Date');

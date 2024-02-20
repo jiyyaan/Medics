@@ -6,6 +6,8 @@ import 'package:medics/res/components/payment_input_field.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/view_models/controller/payment_controller/payment_controller.dart';
 
+import '../../res/app_urls/app_urls.dart';
+
 class CreditDebitCard extends StatelessWidget {
   const CreditDebitCard({Key? key}) : super(key: key);
 
@@ -36,17 +38,17 @@ class CreditDebitCard extends StatelessWidget {
                               SizedBox(
                                 width: 35,
                                 height: 25,
-                                child: Image.asset('assets/icons/visa_credit_card.png', fit: BoxFit.contain,),
+                                child: Image.network('${AppUrl.logos}visa_credit_card.png', fit: BoxFit.contain,),
                               ),
                               SizedBox(
                                 width: 35,
                                 height: 25,
-                                child: Image.asset('assets/icons/mastercard.png', fit: BoxFit.contain,),
+                                child: Image.network('${AppUrl.logos}mastercard.png', fit: BoxFit.contain,),
                               ),
                               SizedBox(
                                 width: 35,
                                 height: 25,
-                                child: Image.asset('assets/icons/union.png', fit: BoxFit.contain,),
+                                child: Image.network('${AppUrl.logos}union.png', fit: BoxFit.contain,),
                               ),
                             ],
                           ),
@@ -137,7 +139,7 @@ class CreditDebitCard extends StatelessWidget {
                       child: SizedBox(
                         width: 70,
                         height: 50,
-                        child: Image.asset('assets/icons/visa_credit_card.png', fit: BoxFit.contain,),
+                        child: Image.network('${AppUrl.logos}visa_credit_card.png', fit: BoxFit.contain,),
                       ),
                     ),
                     Padding(
@@ -145,7 +147,7 @@ class CreditDebitCard extends StatelessWidget {
                       child: SizedBox(
                         width: 70,
                         height: 50,
-                        child: Image.asset('assets/icons/paypal.png', fit: BoxFit.contain,),
+                        child: Image.asset('${AppUrl.logos}paypal.png', fit: BoxFit.contain,),
                       ),
                     ),
                     Padding(
@@ -153,7 +155,7 @@ class CreditDebitCard extends StatelessWidget {
                       child: SizedBox(
                         width: 70,
                         height: 50,
-                        child: Image.asset('assets/icons/mastercard.png', fit: BoxFit.contain,),
+                        child: Image.asset('${AppUrl.logos}mastercard.png', fit: BoxFit.contain,),
                       ),
                     ),
                     Padding(
@@ -161,7 +163,7 @@ class CreditDebitCard extends StatelessWidget {
                       child: SizedBox(
                         width: 70,
                         height: 50,
-                        child: Image.asset('assets/icons/union.png', fit: BoxFit.contain,),
+                        child: Image.asset('${AppUrl.logos}union.png', fit: BoxFit.contain,),
                       ),
                     ),
                   ],

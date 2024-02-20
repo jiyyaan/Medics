@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medics/repository/doctor_panel_repo.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
+import 'package:medics/view/doctor_panel/doctor_panel.dart';
 
 class DoctorFormTwoController extends GetxController{
   final String doctorID = Get.arguments;
@@ -92,7 +93,7 @@ class DoctorFormTwoController extends GetxController{
             RoutesNames.doctorPanel,
             arguments: doctorID,
           );
-          print(value["message"]);
+          Utils.toastMessage(value["message"]);
         } else {
           Utils.toastErrorMessage(value["message"]);
         }

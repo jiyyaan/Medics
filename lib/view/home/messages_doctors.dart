@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
+import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 
+import '../../res/app_urls/app_urls.dart';
+
 class MessagesDoctors extends StatefulWidget {
-  const MessagesDoctors({Key? key}) : super(key: key);
+  const MessagesDoctors({super.key});
 
   @override
   State<MessagesDoctors> createState() => _MessagesDoctorsState();
@@ -190,9 +193,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                         child: Card(
                           elevation: 0,
                           child: ListTile(
-                            leading: const CircleAvatar(
+                            leading: CircleAvatar(
                               radius: 20,
-                              backgroundImage: AssetImage('images/Dr.Marcus.png'),
+                              backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Marcus.png'),
                             ),
                             title: const Text(
                               'One-line ListTile',
@@ -232,9 +235,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Maria.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Maria.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -252,8 +255,8 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Image.asset(
-                                'assets/icons/double-tick.png',
+                              Image.network(
+                                '${AppUrl.icons}double-tick.png',
                                 scale: 30,
                                 color: AppColors.klightGrey,
                               ),
@@ -264,9 +267,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Marcus.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Marcus.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -305,9 +308,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Maria.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Maria.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -325,8 +328,8 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Image.asset(
-                                'assets/icons/double-tick.png',
+                              Image.network(
+                                '${AppUrl.icons}double-tick.png',
                                 scale: 30,
                                 color: AppColors.klightGrey,
                               ),
@@ -337,9 +340,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Marcus.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Marcus.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -378,9 +381,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Maria.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Maria.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -398,8 +401,8 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Image.asset(
-                                'assets/icons/double-tick.png',
+                              Image.network(
+                                '${AppUrl.icons}double-tick.png',
                                 scale: 30,
                                 color: AppColors.klightGrey,
                               ),
@@ -410,9 +413,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Marcus.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Marcus.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -451,9 +454,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Maria.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Maria.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -471,8 +474,8 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Image.asset(
-                                'assets/icons/double-tick.png',
+                              Image.network(
+                                '${AppUrl.icons}double-tick.png',
                                 scale: 30,
                                 color: AppColors.klightGrey,
                               ),
@@ -483,9 +486,9 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
                       Card(
                         elevation: 0,
                         child: ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/Dr.Marcus.png'),
+                            backgroundImage: NetworkImage('${AppUrl.doctorPictures}Dr.Marcus.png'),
                           ),
                           title: const Text(
                             'One-line ListTile',
@@ -530,6 +533,7 @@ class _MessagesDoctorsState extends State<MessagesDoctors> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigation(width: width),
     );
   }
 }

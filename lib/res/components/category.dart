@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medics/res/assets/image_assets.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 
 class Category extends StatelessWidget {
@@ -28,7 +28,8 @@ class Category extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(MedicsImageAssets.baseIconURL+catIcon),
+                Image.network(AppUrl.icons+catIcon),
+                // Image.asset(MedicsImageAssets.baseIconURL+catIcon),
                 Text(
                   catName,
                   style: const TextStyle(

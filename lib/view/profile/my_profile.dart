@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:medics/main.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/components/logout_alert.dart';
 import 'package:medics/res/routes/routes_names.dart';
+import '../../res/app_urls/app_urls.dart';
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({Key? key}) : super(key: key);
+class MyProfile extends StatelessWidget {
+  const MyProfile({super.key});
 
-  @override
-  State<MyProfile> createState() => _MyProfileState();
-}
-
-class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -26,40 +21,39 @@ class _MyProfileState extends State<MyProfile> {
         child: Container(
           width: width,
           height: height,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              colorFilter: ColorFilter.srgbToLinearGamma(),
-              alignment: Alignment(15, -3),
-              image: AssetImage(
-                'images/elipse.png',
-              ),
+              colorFilter: const ColorFilter.srgbToLinearGamma(),
+              alignment: const Alignment(15, -3),
+              image: NetworkImage("${AppUrl.backgroundPictures}elipse.png"),
             ),
           ),
           child: Column(
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  /// Patient Image
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: CircleAvatar(
-                      backgroundImage: AssetImage('images/Dr.Karsten.jpg'),
+                      backgroundImage: NetworkImage('${AppUrl.patientPictures}Dr.Karsten.jpg'),
                       radius: 60,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
                     child: Text(
                       'Karsten Winegeart',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
                     child: IntrinsicWidth(
                       stepHeight: 10,
                       child: Row(
@@ -174,79 +168,75 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 20,),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.klightTeal,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Center(child: FaIcon(FontAwesomeIcons.heart, color: AppColors.kdarkColor,),),
+                      ListTile(
+                        leading:
+                        Container(
+                          margin: const EdgeInsets.only(right: 20,),
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.klightTeal,
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                          const Text('My Saved', style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold,),),
-                          const Spacer(),
-                          const FaIcon(FontAwesomeIcons.angleRight,),
-                        ],
+                          child: const Center(child: FaIcon(FontAwesomeIcons.heart, color: AppColors.kdarkColor,),),
+                        ),
+                        title: const Text('My Saved'),
+                        trailing: const FaIcon(FontAwesomeIcons.angleRight,size: 14,),
+                        tileColor: AppColors.kwhite,
                       ),
                       const Divider(thickness: 1.5, color: AppColors.klightTeal,),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 20,),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.klightTeal,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Center(child: FaIcon(FontAwesomeIcons.fileInvoice, color: AppColors.kdarkColor,),),
+                      ListTile(
+                        leading:
+                        Container(
+                          margin: const EdgeInsets.only(right: 20,),
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.klightTeal,
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                          const Text('Appointment', style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold,),),
-                          const Spacer(),
-                          const FaIcon(FontAwesomeIcons.angleRight,),
-                        ],
+                          child: const Center(child: FaIcon(FontAwesomeIcons.fileInvoice, color: AppColors.kdarkColor,),),
+                        ),
+                        title: const Text('Appointments'),
+                        trailing: const FaIcon(FontAwesomeIcons.angleRight,size: 14,),
+                        tileColor: AppColors.kwhite,
                       ),
                       const Divider(thickness: 1.5, color: AppColors.klightTeal,),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 20,),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.klightTeal,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Center(child: FaIcon(FontAwesomeIcons.creditCard, color: AppColors.kdarkColor,),),
+                      ListTile(
+                        leading:
+                        Container(
+                          margin: const EdgeInsets.only(right: 20,),
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.klightTeal,
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                          const Text('Payment Method', style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold,),),
-                          const Spacer(),
-                          const FaIcon(FontAwesomeIcons.angleRight,),
-                        ],
+                          child: const Center(child: FaIcon(FontAwesomeIcons.creditCard, color: AppColors.kdarkColor,),),
+                        ),
+                        title: const Text('Payment Method'),
+                        trailing: const FaIcon(FontAwesomeIcons.angleRight,size: 14,),
+                        tileColor: AppColors.kwhite,
                       ),
                       const Divider(thickness: 1.5, color: AppColors.klightTeal,),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 20,),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.klightTeal,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Center(child: FaIcon(FontAwesomeIcons.commentDots, color: AppColors.kdarkColor,),),
+                      ListTile(
+                        leading:
+                        Container(
+                          margin: const EdgeInsets.only(right: 20,),
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.klightTeal,
+                            borderRadius: BorderRadius.circular(50),
                           ),
-                          const Text('FAQs', style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold,),),
-                          const Spacer(),
-                          const FaIcon(FontAwesomeIcons.angleRight,),
-                        ],
+                          child: const Center(child: FaIcon(FontAwesomeIcons.commentDots, color: AppColors.kdarkColor,),),
+                        ),
+                        title: const Text('FAQs'),
+                        trailing: const FaIcon(FontAwesomeIcons.angleRight,size: 14,),
+                        tileColor: AppColors.kwhite,
                       ),
                       const Divider(thickness: 1.5, color: AppColors.klightTeal,),
-                      GestureDetector(
+                      ListTile(
                         onTap: (){
                           showDialog(
                             context: context,
@@ -256,29 +246,26 @@ class _MyProfileState extends State<MyProfile> {
                                   Get.offNamedUntil(RoutesNames.login, (route) => false);
                                 },
                                 cancelFunction: (){
-                                  navigatorKey.currentState!.pop();
+                                  Get.back();
                                 },
                               );
                             },
                           );
                         },
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: 20, bottom: 5),
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: AppColors.klightTeal,
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: const Center(child: FaIcon(FontAwesomeIcons.exclamation, color: Colors.red,),),
-                            ),
-                            const Text('Logout', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold,),),
-                            const Spacer(),
-                            const FaIcon(FontAwesomeIcons.angleRight,),
-                          ],
+                        leading:
+                        Container(
+                          margin: const EdgeInsets.only(right: 20,),
+                          width: 45,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.klightTeal,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: const Center(child: FaIcon(FontAwesomeIcons.exclamation, color: AppColors.kredColor,),),
                         ),
+                        title: const Text('Logout', style: TextStyle(color: AppColors.kredColor),),
+                        trailing: const FaIcon(FontAwesomeIcons.angleRight,size: 14,),
+                        tileColor: AppColors.kwhite,
                       ),
                     ],
                   ),

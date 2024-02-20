@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/input_field.dart';
 import 'package:medics/res/components/menu_button.dart';
 import 'package:medics/res/constants/constants.dart';
 
 class Articles extends StatelessWidget {
-  const Articles({Key? key}) : super(key: key);
+  const Articles({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +26,11 @@ class Articles extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
                 child: InputField(
                   heightField: 40,
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search_sharp,
                   ),
                   hintText: 'Search articles, news...',
@@ -173,8 +174,8 @@ class Articles extends StatelessWidget {
                             height: 70,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_1.jpg'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_1.jpg'),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -245,8 +246,8 @@ class Articles extends StatelessWidget {
                             height: 70,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_2.jpg'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_2.jpg'),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -317,8 +318,8 @@ class Articles extends StatelessWidget {
                             height: 70,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_3.png'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_3.png'),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -411,8 +412,8 @@ class Articles extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColors.kdarkColor,
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_1.jpg'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_1.jpg'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -488,8 +489,8 @@ class Articles extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColors.kdarkColor,
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_2.jpg'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_2.jpg'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -565,8 +566,8 @@ class Articles extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColors.kdarkColor,
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_3.png'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_3.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -642,8 +643,8 @@ class Articles extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColors.kdarkColor,
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/article_1.jpg'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}article_1.jpg'),
                                 fit: BoxFit.cover,
                               ),
                             ),

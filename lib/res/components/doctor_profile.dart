@@ -12,7 +12,7 @@ class DoctorProfileVertical extends StatelessWidget {
     required this.distance,
   });
 
-  final String imagePath;
+  final ImageProvider<Object>? imagePath;
   final String nameDr;
   final String speciality;
   final String rating;
@@ -39,7 +39,7 @@ class DoctorProfileVertical extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 35,
                     backgroundColor: AppColors.kwhiteSmoke,
-                    backgroundImage: AssetImage(MedicsImageAssets.baseDoctorProfileURL+imagePath),
+                    backgroundImage: imagePath,
                   ),
                 ),
               ),

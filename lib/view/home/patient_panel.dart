@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/components/category.dart';
@@ -10,7 +11,7 @@ import 'package:medics/res/components/input_field.dart';
 import 'package:medics/res/components/menu_button.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
-import 'package:medics/view_models/controller/home_controller/home_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/home_controller.dart';
 
 class PatientPanel extends StatelessWidget {
   const PatientPanel({super.key});
@@ -21,16 +22,14 @@ class PatientPanel extends StatelessWidget {
     HomeController controller = Get.find<HomeController>();
     return Scaffold(
       body: Obx(()=>(controller.categoryList.isNotEmpty &&
-          controller.doctorsList.isNotEmpty)
+          controller.doctorsList.isNotEmpty && controller.patientDetail.isNotEmpty)
           ? const HomeScreen()
           : CustomProgressIndicator(width: width),),
     );
   }
 }
-
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -86,7 +85,6 @@ class HomeScreen extends StatelessWidget {
                       hintText: 'Search doctor, drugs, articles...',
                     ),
                   ),
-
                   ///Categories
                   SizedBox(
                     height: 100,
@@ -96,21 +94,26 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),
-                          child: Category(
-                            catIcon: controller.categoryList[index].catIcon
-                                .toString(),
-                            catName: controller.categoryList[index].catName
-                                .toString(),
+                          child: GestureDetector(
+                            onTap: (){
+                              if(controller.categoryList[index].catName=="Pharmacy"){
+                                Get.toNamed(RoutesNames.pharmacyHome);
+                              }
+                            },
+                            child: Category(
+                              catIcon: controller.categoryList[index].catIcon
+                                  .toString(),
+                              catName: controller.categoryList[index].catName
+                                  .toString(),
+                            ),
                           ),
                         );
                       },
                     ),
                   ),
-
                   ///Advertisement
                   DisplayAdd(width: width, height: height),
-
-                  ///Top Doctors
+                  ///Top Doctors Heading
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Row(
@@ -139,8 +142,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                  ///Doctors
+                  /// Top Doctors
                   SizedBox(
                     height: 170,
                     child: ListView.builder(
@@ -156,8 +158,7 @@ class HomeScreen extends StatelessWidget {
                                       .doctorsList[index].docProfileId);
                             },
                             child: DoctorProfileVertical(
-                              imagePath: controller.doctorsList[index].docPhoto
-                                  .toString(),
+                              imagePath: NetworkImage(AppUrl.doctorPictures + controller.doctorsList[index].docPhoto),
                               nameDr: controller.doctorsList[index].docName
                                   .toString(),
                               speciality:
@@ -170,7 +171,6 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ),
-
                   ///Health Articles
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
@@ -200,7 +200,6 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   ///Articles
                   Container(
                     padding: const EdgeInsets.all(10),
@@ -220,8 +219,8 @@ class HomeScreen extends StatelessWidget {
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: AssetImage('images/medicines.jpg'),
+                              image: DecorationImage(
+                                image: NetworkImage('${AppUrl.articlePictures}medicines.jpg'),
                                 fit: BoxFit.fill,
                               ),
                             ),

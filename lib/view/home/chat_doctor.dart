@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/input_field.dart';
 import 'package:medics/res/components/menu_button.dart';
@@ -8,7 +9,7 @@ import 'package:medics/res/components/sent_message.dart';
 import 'package:medics/res/constants/constants.dart';
 
 class ChatDoctor extends StatelessWidget {
-  const ChatDoctor({Key? key}) : super(key: key);
+  const ChatDoctor({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +85,7 @@ class ChatDoctor extends StatelessWidget {
                       children: [
                         SentMessage(
                           width: width,
-                          imagePath: 'images/Dr.Marcus.png',
+                          imagePath: '${AppUrl.doctorPictures}Dr.Marcus.png',
                           nameDr: 'Dr.Marcus Horizon',
                           timeWas: '10 min ago',
                           msgDesc: 'Hello, How can i help you?',
@@ -98,7 +99,7 @@ class ChatDoctor extends StatelessWidget {
                         ),
                         SentMessage(
                           width: width,
-                          imagePath: 'images/Dr.Marcus.png',
+                          imagePath: '${AppUrl.doctorPictures}Dr.Marcus.png',
                           nameDr: 'Dr.Marcus Horizon',
                           timeWas: '5 min ago',
                           msgDesc: 'Ok, Do you have fever? is the headchace severe',
@@ -112,7 +113,7 @@ class ChatDoctor extends StatelessWidget {
                         ),
                         SentMessage(
                           width: width,
-                          imagePath: 'images/Dr.Marcus.png',
+                          imagePath: '${AppUrl.doctorPictures}Dr.Marcus.png',
                           nameDr: 'Dr.Marcus Horizon',
                           timeWas: '5 min ago',
                           msgDesc: 'Ok, Do you have fever? is the headchace severe',

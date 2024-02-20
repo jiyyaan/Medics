@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/dark_button.dart';
 
@@ -75,9 +76,7 @@ class DisplayAdd extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Image.asset(
-              'images/ad-dr.png',
-            ),
+            child: Image.network('${AppUrl.doctorAds}ad-dr.png'),
           ),
         ],
       ),

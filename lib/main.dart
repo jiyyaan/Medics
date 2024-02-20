@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/localization/app_localization.dart';
 import 'package:medics/res/colors/app_colors.dart';

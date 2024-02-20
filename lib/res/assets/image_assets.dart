@@ -5,10 +5,6 @@ class MedicsImageAssets{
   static const String baseImagesURL = 'assets/images/';
   ///Animations Folder Path
   static const String baseAnimURL = 'assets/animations/';
-  /// Icon Folder Path
-  static const String baseIconURL = 'assets/icons/';
-  /// Doctors Profile Pictures Path
-  static const String baseDoctorProfileURL = 'assets/doctors/';
 
 
 

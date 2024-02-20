@@ -1,5 +1,7 @@
 class AppConstants {
   static const double kpaddingLR = 8.0;
+  static const double borderRadiusAll = 10.0;
+  static const double labelPaddingLeft = 25.0;
   static const double timeBoxWidth = 2;
   static const double timeBoxHeight = 2;
   static const String dollarSign = '\$';

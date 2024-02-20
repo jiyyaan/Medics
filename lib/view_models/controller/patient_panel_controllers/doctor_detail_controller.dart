@@ -1,15 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:medics/models/doctor_profile_model.dart';
+import 'package:medics/models/reserved_time_doctors.dart';
 import 'package:medics/models/time_table_model.dart';
-import 'package:medics/repository/doctor_detail_repository.dart';
+import 'package:medics/repository/doctor_panel_repo.dart';
 
 class DoctorDetailController extends GetxController{
-  final DoctorDetailRepository _doctorDetail = DoctorDetailRepository();
+  final DoctorPanelRepositories _doctorDetail = DoctorPanelRepositories();
 
   Rx<bool> isReadMore = false.obs;
-  Rx<bool> isLoading = true.obs;
+  Rx<bool> isLoading = false.obs;
   String doctorID = Get.arguments;
+  Rx<String> timeID = "".obs;
   Rx<int> timeIndex = (-1).obs;
   Rx<int> dateIndex = (-1).obs;
   Rx<String> selectedDate = ''.obs;
@@ -18,6 +21,7 @@ class DoctorDetailController extends GetxController{
   List<DoctorProfileModel> doctorDetail = <DoctorProfileModel>[].obs;
   List<Map<String, dynamic>> datesList = [];
   List<TimeTableModel> timeList = <TimeTableModel>[].obs;
+  List<ReservedTimeDoctors> reservedTimeList = <ReservedTimeDoctors>[].obs;
 
   @override
   void onInit() {
@@ -26,6 +30,7 @@ class DoctorDetailController extends GetxController{
     fetchDoctorDetail();
     getNext30Days();
     fetchTimeTable();
+    fetchReservedTimeDoctors();
   }
   ///24 hours to 12 hours Conversion Method
   String twelveHourFormat(String time) {
@@ -42,12 +47,13 @@ class DoctorDetailController extends GetxController{
       'doctor_id': doctorID
     };
     try{
-      isLoading(true);
       var responseData = await _doctorDetail.fetchDoctorDetail(data);
       doctorDetail.assignAll(responseData);
     }
-    finally{
-      isLoading(false);
+    catch(e){
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
   /// Fetch Date and Day
@@ -76,12 +82,33 @@ class DoctorDetailController extends GetxController{
       'doctor_id': doctorID
     };
     try{
-      isLoading(true);
       var responseData = await _doctorDetail.fetchTimeTable(data);
       timeList.assignAll(responseData);
     }
-    finally{
-      isLoading(false);
+    catch(e){
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
+
+  void fetchReservedTimeDoctors()async{
+    Map data = {
+      'selected_date': selectedDate.value,
+      'doctor_id': doctorID
+    };
+    isLoading.value = false;
+    try{
+      isLoading.value = false;
+      var responseData = await _doctorDetail.fetchReservedTimeDoctors(data);
+      reservedTimeList.assignAll(responseData);
+      isLoading.value = true;
+    }
+    catch(e){
+      if (kDebugMode) {
+        isLoading.value = false;
+        print(e.toString());
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/dark_button.dart';
 import 'package:medics/res/constants/constants.dart';
@@ -46,9 +47,7 @@ class _DrugDetailState extends State<DrugDetail> {
                     maxWidth: 200,
                     maxHeight: 200,
                   ),
-                  child: Image.asset(
-                    'images/pharmacy/l_lysine.jpg',
-                  ),
+                  child: Image.network('${AppUrl.medicinePictures}l_lysine.jpg'),
                 ),
               ),
             ),

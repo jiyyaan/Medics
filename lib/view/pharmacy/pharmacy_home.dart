@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/components/input_field.dart';
@@ -7,7 +8,7 @@ import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 
 class PharmacyHome extends StatefulWidget {
-  const PharmacyHome({Key? key}) : super(key: key);
+  const PharmacyHome({super.key});
 
   @override
   State<PharmacyHome> createState() => _PharmacyHomeState();
@@ -40,16 +41,18 @@ class _PharmacyHomeState extends State<PharmacyHome> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+              ///Search bar
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: InputField(
                   heightField: 40,
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search_sharp,
                   ),
                   hintText: 'Search drugs, category...',
                 ),
               ),
+              ///Advertisement
               Container(
                 padding: const EdgeInsets.only(
                   left: 15,
@@ -102,9 +105,7 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                         ],
                       ),
                     ),
-                    Image.asset(
-                      'images/tablets.png',
-                    ),
+                    Image.network('${AppUrl.pharmacyAds}tablets.png'),
                   ],
                 ),
               ),
@@ -152,20 +153,18 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                                 alignment: Alignment.topCenter,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'images/pharmacy/aromasin.jpg',
-                                  ),
+                                  child: Image.network('${AppUrl.medicinePictures}aromasin.jpg'),
                                 ),
                               ),
                             ),
                             const Text('Aromasin', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,),),
                             const Text('15 tablets', style: TextStyle(fontSize: 10, color: AppColors.klightGrey),),
                             const SizedBox(height: 10,),
-                            Row(
+                            const Row(
                               children: [
-                                Text("${AppConstants.dollarSign}15.99", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
-                                const Spacer(),
-                                const Icon(Icons.add_box, color: AppColors.kdarkColor,),
+                                Text("${AppConstants.dollarSign}15.99", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+                                Spacer(),
+                                Icon(Icons.add_box, color: AppColors.kdarkColor,),
                               ],
                             ),
                           ],
@@ -193,20 +192,19 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                                 alignment: Alignment.topCenter,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'images/pharmacy/aldactone.jpg',
-                                  ),
+                                  child: Image.network('${AppUrl.medicinePictures}aldactone.jpg'),
+
                                 ),
                               ),
                             ),
                             const Text('Aldactone', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,),),
                             const Text('15 tablets', style: TextStyle(fontSize: 10, color: AppColors.klightGrey),),
                             const SizedBox(height: 10,),
-                            Row(
+                            const Row(
                               children: [
-                                Text("${AppConstants.dollarSign}15.99", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
-                                const Spacer(),
-                                const Icon(Icons.add_box, color: AppColors.kdarkColor,),
+                                Text("${AppConstants.dollarSign}15.99", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+                                Spacer(),
+                                Icon(Icons.add_box, color: AppColors.kdarkColor,),
                               ],
                             ),
                           ],
@@ -234,20 +232,18 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                                 alignment: Alignment.topCenter,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'images/pharmacy/netidin.jpg',
-                                  ),
+                                  child: Image.network('${AppUrl.medicinePictures}netidin.jpg'),
                                 ),
                               ),
                             ),
                             const Text('Netidin', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,),),
                             const Text('15ml', style: TextStyle(fontSize: 10, color: AppColors.klightGrey),),
                             const SizedBox(height: 10,),
-                            Row(
+                            const Row(
                               children: [
-                                Text("${AppConstants.dollarSign}15.99", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
-                                const Spacer(),
-                                const Icon(Icons.add_box, color: AppColors.kdarkColor,),
+                                Text("${AppConstants.dollarSign}15.99", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),),
+                                Spacer(),
+                                Icon(Icons.add_box, color: AppColors.kdarkColor,),
                               ],
                             ),
                           ],
@@ -301,29 +297,27 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                                 alignment: Alignment.topCenter,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'images/pharmacy/panadol.png',
-                                  ),
+                                  child: Image.network('${AppUrl.medicinePictures}panadol.png'),
                                 ),
                               ),
                             ),
                             const Text('Panadol', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,),),
                             const Text('15 tablets', style: TextStyle(fontSize: 10, color: AppColors.klightGrey),),
                             const SizedBox(height: 10,),
-                            Row(
+                            const Row(
                               children: [
                                 Text.rich(
                                   TextSpan(
-                                    text: "${AppConstants.dollarSign}9.99 ", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
+                                    text: "${AppConstants.dollarSign}9.99 ", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
                                     children: [
                                       TextSpan(
-                                        text: "${AppConstants.dollarSign}10.00", style: const TextStyle(color: AppColors.klightGrey, fontSize: 10, decoration: TextDecoration.lineThrough),
+                                        text: "${AppConstants.dollarSign}10.00", style: TextStyle(color: AppColors.klightGrey, fontSize: 10, decoration: TextDecoration.lineThrough),
                                       ),
                                     ],
                                   ),
                                 ),
-                                const Spacer(),
-                                const Icon(Icons.add_box, color: AppColors.kdarkColor,),
+                                Spacer(),
+                                Icon(Icons.add_box, color: AppColors.kdarkColor,),
                               ],
                             ),
                           ],
@@ -351,29 +345,27 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                                 alignment: Alignment.topCenter,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'images/pharmacy/edonax.jpg',
-                                  ),
+                                  child: Image.network('${AppUrl.medicinePictures}edonax.jpg'),
                                 ),
                               ),
                             ),
                             const Text('Edonax', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,),),
                             const Text('15 tablets', style: TextStyle(fontSize: 10, color: AppColors.klightGrey),),
                             const SizedBox(height: 10,),
-                            Row(
+                            const Row(
                               children: [
                                 Text.rich(
                                   TextSpan(
-                                    text: "${AppConstants.dollarSign}9.99 ", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
+                                    text: "${AppConstants.dollarSign}9.99 ", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
                                     children: [
                                       TextSpan(
-                                        text: "${AppConstants.dollarSign}10.00", style: const TextStyle(color: AppColors.klightGrey, fontSize: 10, decoration: TextDecoration.lineThrough),
+                                        text: "${AppConstants.dollarSign}10.00", style: TextStyle(color: AppColors.klightGrey, fontSize: 10, decoration: TextDecoration.lineThrough),
                                       ),
                                     ],
                                   ),
                                 ),
-                                const Spacer(),
-                                const Icon(Icons.add_box, color: AppColors.kdarkColor,),
+                                Spacer(),
+                                Icon(Icons.add_box, color: AppColors.kdarkColor,),
                               ],
                             ),
                           ],
@@ -401,29 +393,27 @@ class _PharmacyHomeState extends State<PharmacyHome> {
                                 alignment: Alignment.topCenter,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    'images/pharmacy/zyrtec.png',
-                                  ),
+                                  child: Image.network('${AppUrl.medicinePictures}zyrtec.png'),
                                 ),
                               ),
                             ),
                             const Text('Zyrtec', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,),),
                             const Text('15 tablets', style: TextStyle(fontSize: 10, color: AppColors.klightGrey),),
                             const SizedBox(height: 10,),
-                            Row(
+                            const Row(
                               children: [
                                 Text.rich(
                                   TextSpan(
-                                    text: "${AppConstants.dollarSign}9.99 ", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
+                                    text: "${AppConstants.dollarSign}9.99 ", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),
                                     children: [
                                       TextSpan(
-                                        text: "${AppConstants.dollarSign}10.00", style: const TextStyle(color: AppColors.klightGrey, fontSize: 10, decoration: TextDecoration.lineThrough),
+                                        text: "${AppConstants.dollarSign}10.00", style: TextStyle(color: AppColors.klightGrey, fontSize: 10, decoration: TextDecoration.lineThrough),
                                       ),
                                     ],
                                   ),
                                 ),
-                                const Spacer(),
-                                const Icon(Icons.add_box, color: AppColors.kdarkColor,),
+                                Spacer(),
+                                Icon(Icons.add_box, color: AppColors.kdarkColor,),
                               ],
                             ),
                           ],

@@ -13,6 +13,8 @@ class RoutesNames{
   /// Doctor Panel LInks
   static const String doctorPanel = '/doctorPanel';
   static const String doctorFormOne = '/doctorFormOne';
+  static const String doctorFormTwo = '/doctorFormTwo';
+  static const String interviewMsg = '/interviewMsg';
   static const String doctorProfile = '/doctorProfile';
 
   ///Patient Panel Links

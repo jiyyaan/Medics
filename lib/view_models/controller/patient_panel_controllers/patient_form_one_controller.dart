@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +21,6 @@ class PatientFormOneController extends GetxController {
   Rx<bool> isLoading = false.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
   Rx<String> imageBase64 = "".obs;
-  Rx<String> ImageBase64 = "".obs;
   /// User Record
   final String userID = Get.arguments;
 
@@ -72,7 +70,7 @@ class PatientFormOneController extends GetxController {
       if (cropped != null) {
         selectedImage.value = File(cropped.path);
         Uint8List imageBytes = await selectedImage.value!.readAsBytes();
-        ImageBase64.value = base64.encode(imageBytes);
+        imageBase64.value = base64.encode(imageBytes);
       }
     }
   }
@@ -108,13 +106,9 @@ class PatientFormOneController extends GetxController {
         'address': addressController.value.text
       };
       _api.patientFormOne(data).then((value) {
-        print(value);
         if (value["success"] == "true") {
           Utils.toastMessage(value["message"]);
-          Get.toNamed(
-            RoutesNames.patientPanel,
-            arguments: value["patientID"],
-          );
+          Get.offNamedUntil(RoutesNames.patientPanel, arguments: value["patientID"], (route) => false);
         } else {
           Utils.toastErrorMessage(value["message"]);
           if (kDebugMode) {

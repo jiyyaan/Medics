@@ -72,14 +72,6 @@ class DoctorFormOne extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 controller.pickImage();
-                                // if(controller.state.value == AppState.free){
-                                //   controller.pickImage();
-                                // }
-                                // if(controller.state.value == AppState.picked){
-                                //   controller.cropImage();
-                                // }else if(controller.state.value == AppState.cropped){
-                                //   controller.clearImage();
-                                // }
                               },
                               child: Container(
                                 width: 30,
@@ -175,6 +167,7 @@ class DoctorFormOne extends StatelessWidget {
                             : controller.fileName.value!.name,
                         onTap: () {
                           Utils.closeKeyboard();
+                          controller.pickFile();
                         },
                       ),
                     ),

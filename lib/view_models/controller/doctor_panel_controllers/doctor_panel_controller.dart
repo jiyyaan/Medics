@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:medics/models/doctor_profile_model.dart';
-import 'package:medics/repository/doctor_detail_repository.dart';
+import 'package:medics/repository/doctor_panel_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DoctorPanelController extends GetxController{
-  final DoctorDetailRepository _doctorDetail = DoctorDetailRepository();
+  final DoctorPanelRepositories _doctorDetail = DoctorPanelRepositories();
   final String doctorID = Get.arguments;
   Rx<bool> isLoading = true.obs;
   RxList<DoctorProfileModel> doctorDetail = <DoctorProfileModel>[].obs;
@@ -52,6 +52,4 @@ class DoctorPanelController extends GetxController{
       }
     }
   }
-
-
 }

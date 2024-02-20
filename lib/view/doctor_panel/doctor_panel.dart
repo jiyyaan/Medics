@@ -13,8 +13,6 @@ import 'package:medics/res/components/notification_icon_with_badge.dart';
 import 'package:medics/res/components/patients_graph.dart';
 import 'package:medics/res/components/summary_box.dart';
 import 'package:medics/res/constants/constants.dart';
-import 'package:medics/view/doctor_panel/doctor_form_two.dart';
-import 'package:medics/view/doctor_panel/interview_message.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
 
 class DoctorPanel extends StatelessWidget {
@@ -27,11 +25,6 @@ class DoctorPanel extends StatelessWidget {
     return Scaffold(
       body: Obx(()=>controller.doctorDetail.isEmpty
           ? CustomProgressIndicator(width: width)
-          : (controller.doctorDetail[0].docStatus == "0")
-          ? const InterviewMessage()
-          : (controller.doctorDetail[0].consultationFee == "0" ||
-          controller.doctorDetail[0].consultationFee == "")
-          ? const DoctorFormTwo()
           : const DoctorPanelHome(),
       ),
     );
@@ -153,13 +146,13 @@ class DoctorPanelHome extends StatelessWidget {
                                 color: AppColors.klightTeal, width: 1.5),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Column(
+                          child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -183,19 +176,19 @@ class DoctorPanelHome extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   CircleAvatar(
                                     radius: 25,
-                                    backgroundImage: AssetImage(
-                                      'images/Dr.Karsten.jpg',
+                                    backgroundImage: NetworkImage(
+                                      '${AppUrl.patientPictures}Dr.Karsten.jpg',
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.solidCalendarDays,
@@ -251,13 +244,13 @@ class DoctorPanelHome extends StatelessWidget {
                                 color: AppColors.klightTeal, width: 1.5),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Column(
+                          child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -281,19 +274,19 @@ class DoctorPanelHome extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   CircleAvatar(
                                     radius: 25,
-                                    backgroundImage: AssetImage(
-                                      'images/Dr.Karsten.jpg',
+                                    backgroundImage: NetworkImage(
+                                      '${AppUrl.patientPictures}Dr.Karsten.jpg',
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.solidCalendarDays,
@@ -349,13 +342,13 @@ class DoctorPanelHome extends StatelessWidget {
                                 color: AppColors.klightTeal, width: 1.5),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Column(
+                          child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -379,19 +372,19 @@ class DoctorPanelHome extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   CircleAvatar(
                                     radius: 25,
-                                    backgroundImage: AssetImage(
-                                      'images/Dr.Karsten.jpg',
+                                    backgroundImage: NetworkImage(
+                                      '${AppUrl.patientPictures}Dr.Karsten.jpg',
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.solidCalendarDays,
@@ -447,13 +440,13 @@ class DoctorPanelHome extends StatelessWidget {
                                 color: AppColors.klightTeal, width: 1.5),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Column(
+                          child: Column(
                             children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -477,19 +470,19 @@ class DoctorPanelHome extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   CircleAvatar(
                                     radius: 25,
-                                    backgroundImage: AssetImage(
-                                      'images/Dr.Karsten.jpg',
+                                    backgroundImage: NetworkImage(
+                                      '${AppUrl.patientPictures}Dr.Karsten.jpg',
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
-                              Row(
+                              const Row(
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.solidCalendarDays,

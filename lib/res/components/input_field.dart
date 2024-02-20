@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medics/res/colors/app_colors.dart';
+import 'package:medics/res/constants/constants.dart';
 
 class InputField extends StatelessWidget {
   const InputField({
@@ -55,7 +56,7 @@ class InputField extends StatelessWidget {
           color: Color(0xff191919),
         ),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.zero,
+          contentPadding: const EdgeInsets.only(left: AppConstants.labelPaddingLeft),
           labelText: labelText,
           filled: true,
           fillColor: AppColors.kwhiteSmoke,
@@ -64,25 +65,25 @@ class InputField extends StatelessWidget {
           hintText: hintText,
           hintStyle: const TextStyle(color: AppColors.kdarkGrey),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusAll),
             borderSide: const BorderSide(
               color: AppColors.ktextFieldBorderColor,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusAll),
             borderSide: const BorderSide(
               color: AppColors.kdarkColor,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusAll),
             borderSide: const BorderSide(
               color: Colors.red,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(AppConstants.borderRadiusAll),
             borderSide: const BorderSide(
               color: Colors.red,
             ),

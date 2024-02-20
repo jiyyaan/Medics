@@ -14,37 +14,34 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.4.0
   cupertino_icons: ^1.0.5
-  fluttertoast: ^8.2.2
-  lottie: ^2.4.0
+  fluttertoast: ^8.2.4
+  lottie: ^3.0.0
   shared_preferences: ^2.1.2
   get: ^4.6.5
-  http: ^1.0.0
-  google_sign_in: ^6.1.4
+  http: ^1.2.0
+  google_sign_in: ^6.2.1
   local_auth: ^2.1.6
   flutter_rating_bar: ^4.0.1
-  flutter_stripe: ^9.2.2
-  syncfusion_flutter_charts: ^22.1.38
-  file_picker: ^5.3.3
+  flutter_stripe: ^10.0.0
+  syncfusion_flutter_charts: ^24.1.47+2
+  file_picker: ^6.1.1
   image_cropper: ^5.0.0
   google_maps_flutter: ^2.4.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
   crypto: ^3.0.3
-flutter:
 
+flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/animations/
-    - assets/icons/
-    - assets/doctors/
-    - images/
-    - images/pharmacy/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

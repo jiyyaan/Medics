@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medics/res/colors/app_colors.dart';
 
+import '../app_urls/app_urls.dart';
+
 class ReceivedMessage extends StatelessWidget {
   const ReceivedMessage({
     super.key,
@@ -58,8 +60,8 @@ class ReceivedMessage extends StatelessWidget {
                                 fontSize: 8,
                               ),
                             ),
-                            Image.asset(
-                              'assets/icons/double-tick.png',
+                            Image.network(
+                              '${AppUrl.icons}double-tick.png',
                               scale: 35,
                               color: Colors.white,
                             ),

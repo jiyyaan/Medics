@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/alert_box.dart';
 import 'package:medics/res/components/dark_button.dart';
@@ -53,10 +54,7 @@ class _MyCartState extends State<MyCart> {
                           children: [
                             SizedBox(
                               width: width * 0.25,
-                              child: Image.asset(
-                                'images/pharmacy/l_lysine.jpg',
-                                scale: 10,
-                              ),
+                              child: Image.network('${AppUrl.medicinePictures}l_lysine.jpg'),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,10 +154,7 @@ class _MyCartState extends State<MyCart> {
                           children: [
                             SizedBox(
                               width: width * 0.25,
-                              child: Image.asset(
-                                'images/pharmacy/panadol.png',
-                                scale: 10,
-                              ),
+                              child: Image.network('${AppUrl.medicinePictures}panadol.png'),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -345,7 +340,7 @@ class _MyCartState extends State<MyCart> {
                                 //   FontAwesomeIcons.ccVisa,
                                 //   color: AppColors.kdarkColor,
                                 // ),
-                                Image.asset('assets/icons/VISA.png'),
+                                Image.network('${AppUrl.logos}VISA.png'),
                                 const Text(
                                   'change',
                                   style: TextStyle(color: AppColors.klightGrey, fontSize: 12),

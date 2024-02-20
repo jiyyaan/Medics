@@ -55,7 +55,7 @@ class DoctorDrawer extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: (){
-                  Get.toNamed(RoutesNames.doctorProfile, arguments: controller.doctorID);
+                  // Get.toNamed(RoutesNames.doctorProfile, arguments: controller.doctorID);
                 },
                 child: const ListTile(
                   leading: Icon(CupertinoIcons.person_crop_circle_fill, color: AppColors.kdarkColor,),

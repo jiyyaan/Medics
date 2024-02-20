@@ -2,8 +2,10 @@ import 'package:get/get.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view/articles/articles_screen.dart';
 import 'package:medics/view/doctor_panel/doctor_form_one.dart';
+import 'package:medics/view/doctor_panel/doctor_form_two.dart';
 import 'package:medics/view/doctor_panel/doctor_panel.dart';
 import 'package:medics/view/doctor_panel/doctor_profile.dart';
+import 'package:medics/view/doctor_panel/interview_message.dart';
 import 'package:medics/view/forgotPassword/forgot_password.dart';
 import 'package:medics/view/forgotPassword/new_password.dart';
 import 'package:medics/view/home/book_appointment.dart';
@@ -18,6 +20,7 @@ import 'package:medics/view/login/login_screen.dart';
 import 'package:medics/view/login/signup_screen.dart';
 import 'package:medics/view/onboarding/onboarding_screen.dart';
 import 'package:medics/view/payment_methods/credit_debit_card.dart';
+import 'package:medics/view/pharmacy/drug_detail.dart';
 import 'package:medics/view/pharmacy/my_cart.dart';
 import 'package:medics/view/pharmacy/pharmacy_home.dart';
 import 'package:medics/view/profile/my_profile.dart';
@@ -28,12 +31,14 @@ import 'package:medics/view_models/controller/auth_controllers/login.dart';
 import 'package:medics/view_models/controller/auth_controllers/login_with_google.dart';
 import 'package:medics/view_models/controller/auth_controllers/signup.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_one_controller.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_form_two_controller.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
 import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_profile_controller.dart';
-import 'package:medics/view_models/controller/home_controller/booking_controller.dart';
-import 'package:medics/view_models/controller/home_controller/doctor_detail_controller.dart';
-import 'package:medics/view_models/controller/home_controller/home_controller.dart';
-import 'package:medics/view_models/controller/home_controller/patient_form_one_controller.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/interview_message_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/booking_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/doctor_detail_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/home_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/patient_form_one_controller.dart';
 import 'package:medics/view_models/controller/payment_controller/jazzcash_controller.dart';
 import 'package:medics/view_models/controller/payment_controller/payment_controller.dart';
 import 'package:medics/view_models/controller/splash_screen_controllers/splash_controller.dart';
@@ -95,10 +100,17 @@ class AppRoutes {
           }),
         ),
         GetPage(
-          name: RoutesNames.doctorPanel,
-          page: () => const DoctorPanel(),
+          name: RoutesNames.doctorFormTwo,
+          page: () => const DoctorFormTwo(),
           binding: BindingsBuilder((){
-            Get.lazyPut<DoctorPanelController>(() => DoctorPanelController());
+            Get.lazyPut<DoctorFormTwoController>(() => DoctorFormTwoController());
+          }),
+        ),
+        GetPage(
+          name: RoutesNames.interviewMsg,
+          page: () => const InterviewMessage(),
+          binding: BindingsBuilder((){
+            Get.lazyPut<InterviewMessageController>(() => InterviewMessageController());
           }),
         ),
         GetPage(
@@ -183,6 +195,10 @@ class AppRoutes {
         GetPage(
           name: RoutesNames.pharmacyHome,
           page: () => const PharmacyHome(),
+        ),
+        GetPage(
+          name: RoutesNames.drugDetail,
+          page: () => const DrugDetail(),
         ),
         GetPage(
           name: RoutesNames.myCart,

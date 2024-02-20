@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/assets/image_assets.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/custom_progress_indicator.dart';
@@ -9,7 +10,7 @@ import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view_models/controller/welcome_screen_controller.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 40),
-                  child: Image.asset('images/green-logo.png'),
+                  child: Image.network("${AppUrl.logos}green-logo.png"),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 8.0),

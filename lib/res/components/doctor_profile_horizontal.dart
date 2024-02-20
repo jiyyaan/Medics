@@ -12,7 +12,7 @@ class DoctorProfileHorizontal extends StatelessWidget {
     required this.distance,
     this.borderColor = const Color(0xFFE8F3F1),
   });
-  final String imagePath;
+  final ImageProvider<Object> imagePath;
   final String drName;
   final String speciality;
   final String rating;
@@ -43,7 +43,7 @@ class DoctorProfileHorizontal extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: AssetImage(MedicsImageAssets.baseDoctorProfileURL+imagePath),
+                        image: imagePath,
                         fit: BoxFit.fill,
                       ),
                     ),

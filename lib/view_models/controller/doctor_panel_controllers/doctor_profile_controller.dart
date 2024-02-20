@@ -2,16 +2,17 @@ import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:medics/models/doctor_profile_model.dart';
 import 'package:medics/models/time_table_model.dart';
-import 'package:medics/repository/doctor_detail_repository.dart';
+import 'package:medics/repository/doctor_panel_repo.dart';
 
 class DoctorProfileController extends GetxController{
-  final DoctorDetailRepository _doctorDetail = DoctorDetailRepository();
+  final DoctorPanelRepositories _doctorDetail = DoctorPanelRepositories();
 
   Rx<bool> isReadMore = false.obs;
   Rx<bool> isLoading = true.obs;
   String doctorID = Get.arguments;
   Rx<int> timeIndex = (-1).obs;
   Rx<int> dateIndex = (-1).obs;
+  Rx<String> timeID = ''.obs;
   Rx<String> selectedDate = ''.obs;
   Rx<String> selectedTime = ''.obs;
 

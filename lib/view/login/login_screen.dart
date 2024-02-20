@@ -10,6 +10,8 @@ import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view_models/controller/auth_controllers/login.dart';
 import 'package:medics/view_models/controller/auth_controllers/login_with_google.dart';
 
+import '../../res/app_urls/app_urls.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -141,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: SignInWith(
                     text: 'Sign in with Google',
-                    path: 'assets/icons/google.png',
+                    path: "${AppUrl.logos}google.png",
                     function: () {
                       Get.find<LoginWithGoogleController>().loginWithGoogle(context);
                     },
@@ -152,7 +154,7 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: SignInWith(
                     text: 'Sign in with Facebook',
-                    path: 'assets/icons/facebook.png',
+                    path: '${AppUrl.logos}facebook.png',
                     function: () {},
                   ),
                 ),
@@ -161,7 +163,7 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: SignInWith(
                     text: 'Sign in with Apple',
-                    path: 'assets/icons/apple.png',
+                    path: '${AppUrl.logos}apple.png',
                     function: () {},
                   ),
                 ),

@@ -3,16 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/repository/auth_repository.dart';
-import 'package:medics/repository/doctor_panel_repo.dart';
-import 'package:medics/repository/patient_panel_repo.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
 
 class LoginController extends GetxController{
 
   final _api = AuthRepository();
-  final _apiDoctorPanel = DoctorPanelRepositories();
-  final _apiPatientPanel = PatientPanelRepositories();
 
   final Rx<bool> showPassword = true.obs;
 
@@ -89,12 +85,18 @@ class LoginController extends GetxController{
       'userID': userID
     };
     try{
-      _apiDoctorPanel.doctorPanel(data).then((value) {
-        if (value["success"] == "false"){
-          Get.offNamedUntil(RoutesNames.doctorFormOne, arguments: userID, (route) => false);
+      _api.doctorPanel(data).then((value) {
+        if (value["success"] == "true"){
+          if(value["docStatus"] == "0"){
+            Get.offNamedUntil(RoutesNames.interviewMsg, arguments: value["doctorID"], (route) => false);
+          }else if(value["consultFee"] == "0" ||value["consultFee"] == ""){
+            Get.offNamedUntil(RoutesNames.doctorFormTwo, arguments: value["doctorID"], (route) => false);
+          }else{
+            Get.offNamedUntil(RoutesNames.doctorPanel, arguments: value["doctorID"], (route) => false);
+          }
         }
-        else if (value["success"] == "true"){
-          Get.offNamedUntil(RoutesNames.doctorPanel, arguments: value["doctorID"], (route) => false);
+        else if (value["success"] == "false"){
+          Get.offNamedUntil(RoutesNames.doctorFormOne, arguments: userID, (route) => false);
         }
       });
     }catch (e){
@@ -110,7 +112,7 @@ class LoginController extends GetxController{
       'userID': userID
     };
     try{
-      _apiPatientPanel.patientPanel(data).then((value) {
+      _api.patientPanel(data).then((value) {
         if (value["success"] == "false"){
           Get.offNamedUntil(RoutesNames.patientFormOne, arguments: userID, (route) => false);
         }

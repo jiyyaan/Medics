@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/res/colors/app_colors.dart';
+import 'package:medics/res/components/custom_progress_indicator.dart';
 import 'package:medics/res/routes/routes_names.dart';
-import 'package:medics/view_models/controller/doctor_panel_controllers/doctor_panel_controller.dart';
+import 'package:medics/view_models/controller/doctor_panel_controllers/interview_message_controller.dart';
 
 class InterviewMessage extends StatelessWidget {
   const InterviewMessage({super.key});
@@ -11,7 +11,7 @@ class InterviewMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    DoctorPanelController controller = Get.find<DoctorPanelController>();
+    InterviewMessageController controller = Get.find<InterviewMessageController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.kdarkColor,
@@ -43,9 +43,29 @@ class InterviewMessage extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('Dear ${controller.doctorDetail[0].docName}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),),),
+                  child: Obx(()=>Text('Dear ${controller.name.value}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,),),),
+                ),
                 const SizedBox(height: 12,),
-                const Text('Your interview call letter will be send to your concerned email.'),
+                Obx(()=>RichText(
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  text: TextSpan(
+                    text: 'Your interview call letter will be send to your concerned email ',
+                    style: const TextStyle(
+                      color: Colors.black,
+                    ),
+                    children: <InlineSpan>[
+                      TextSpan(
+                        text: controller.email.value.toString(),
+                        style: const TextStyle(
+                          color: AppColors.kdarkColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),),
                 const Align(
                   alignment: Alignment.centerRight,
                   child: Text('Regards!', style: TextStyle(fontWeight: FontWeight.bold),),),

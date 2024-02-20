@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/bottom_navigation.dart';
 import 'package:medics/res/constants/constants.dart';
 
 
 class ScheduleDoctors extends StatefulWidget {
-  const ScheduleDoctors({Key? key}) : super(key: key);
+  const ScheduleDoctors({super.key});
 
   @override
   State<ScheduleDoctors> createState() => _ScheduleDoctorsState();
@@ -194,11 +195,11 @@ class _ScheduleDoctorsState extends State<ScheduleDoctors> {
                         ),
                         child: Column(
                           children: [
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
+                                const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -219,11 +220,11 @@ class _ScheduleDoctorsState extends State<ScheduleDoctors> {
                                     ),
                                   ],
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 CircleAvatar(
                                   radius: 30,
-                                  backgroundImage: AssetImage(
-                                    'images/Dr.Marcus.png',
+                                  backgroundImage: NetworkImage(
+                                    '${AppUrl.doctorPictures}Dr.Marcus.png',
                                   ),
                                 ),
                               ],

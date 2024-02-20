@@ -36,5 +36,25 @@ class AuthRepository {
       rethrow;
     }
   }
+  ///Doctor Profile Repository
+  Future<dynamic> doctorPanel(data) async {
+    try {
+      dynamic response =
+      await networkApiService.postApiResponse(AppUrl.doctorPanel, data);
+      return jsonDecode(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+  ///Patient Profile Repository
+  Future<dynamic> patientPanel(data) async {
+    try {
+      dynamic response =
+      await networkApiService.postApiResponse(AppUrl.patientPanel, data);
+      return jsonDecode(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 

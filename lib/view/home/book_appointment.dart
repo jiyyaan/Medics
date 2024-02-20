@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/custom_progress_indicator.dart';
 import 'package:medics/res/components/dark_button.dart';
@@ -9,12 +10,12 @@ import 'package:medics/res/components/doctor_profile_horizontal.dart';
 import 'package:medics/res/components/payment_detail.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/utils/utils.dart';
-import 'package:medics/view_models/controller/home_controller/booking_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/booking_controller.dart';
 import 'package:medics/view_models/controller/payment_controller/jazzcash_controller.dart';
 import 'package:medics/view_models/controller/payment_controller/payment_controller.dart';
 
 class BookAppointment extends StatelessWidget {
-  const BookAppointment({Key? key}) : super(key: key);
+  const BookAppointment({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,7 @@ class BookAppointment extends StatelessWidget {
                       children: [
                         ///Doctor Profile
                         DoctorProfileHorizontal(
-                          imagePath: Get.find<BookingController>()
-                              .doctorDetail[0]
-                              .docPhoto,
+                          imagePath: NetworkImage(AppUrl.doctorPictures + controller.doctorDetail[0].docPhoto),
                           drName: Get.find<BookingController>()
                               .doctorDetail[0]
                               .docName,
@@ -89,7 +88,7 @@ class BookAppointment extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 5),
                           child: Row(
                             children: [
-                              /// Icon Formating
+                              /// Icon Formatting
                               Padding(
                                 padding: const EdgeInsets.only(right: 20),
                                 child: Container(
@@ -147,14 +146,14 @@ class BookAppointment extends StatelessWidget {
                                       return AlertDialog(
                                         title: const Text('Reason'),
                                         content: TextField(
-                                          controller: controller.textController,
+                                          controller: controller.symptomsController,
                                         ),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
-                                              controller.reason.value =
+                                              controller.symptoms.value =
                                                   controller
-                                                      .textController.text;
+                                                      .symptomsController.text;
                                               Navigator.of(context).pop();
                                             },
                                             child: const Text('Save'),
@@ -176,12 +175,16 @@ class BookAppointment extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5),
-                          child: Row(
-                            children: [
-                              ///Edit Icon
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Container(
+                          child: SizedBox(
+                            height: 40,
+                            child: TextFormField(
+                              textAlignVertical: TextAlignVertical.center,
+                              controller: controller.symptomsController,
+                              focusNode: controller.symptomsFocusNode,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.zero,
+                                prefixIcon: Container(
+                                  margin: const EdgeInsets.only(right: 20),
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
@@ -196,19 +199,14 @@ class BookAppointment extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+                                hintText: 'Tell me something about your discomfort...',
+                                hintStyle: const TextStyle(
+                                    color: AppColors.kdarkGrey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                                border: InputBorder.none,
                               ),
-
-                              /// Disease Text
-                              Obx(
-                                () => Text(
-                                  controller.reason.value,
-                                  style: const TextStyle(
-                                      color: AppColors.kdarkGrey,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                         const Divider(
@@ -256,9 +254,9 @@ class BookAppointment extends StatelessWidget {
                           hint: const Text('Select Payment Method'),
                           onChanged: (newValue){
                             controller.selectedPaymentMethod.value = newValue.toString();
-                          }),
-                        ),
+                          })),
                         const Spacer(),
+                        /// Total Payment and Button
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Row(
@@ -289,7 +287,10 @@ class BookAppointment extends StatelessWidget {
                                   text: 'Get Appointment',
                                   heightButton: 50,
                                   function: (){
-                                    print(controller.selectedPaymentMethod.value);
+                                    controller.getAppointment(context);
+                                    if (kDebugMode) {
+                                      print(controller.selectedPaymentMethod.value);
+                                    }
                                     if(controller.selectedPaymentMethod.value == "1"){
                                       Get.find<PaymentController>().makePayment(
                                               amount: controller.totalAmount.value,

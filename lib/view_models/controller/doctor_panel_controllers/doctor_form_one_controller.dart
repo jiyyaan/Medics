@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,13 +22,15 @@ class DoctorFormOneController extends GetxController {
 
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final Rx<bool> isChecked = false.obs;
-  Rx<String> gender = ('-1').obs;
+  final Rx<String> name = "".obs;
+  final Rx<String> email = "".obs;
+
   Rx<bool> isLoading = false.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
   Rx<File?> selectedFile = Rx<File?>(null);
   Rx<PlatformFile?> fileName = Rx<PlatformFile?>(null);
-  Rx<String> ImageBase64 = "".obs;
-  Rx<String> FileBase64 = "".obs;
+  Rx<String> imageBase64 = "".obs;
+  Rx<String> fileBase64 = "".obs;
 
 
   /// User Record
@@ -80,7 +81,7 @@ class DoctorFormOneController extends GetxController {
       if (cropped != null) {
         selectedImage.value = File(cropped.path);
         Uint8List imageBytes = await selectedImage.value!.readAsBytes();
-        ImageBase64.value = base64.encode(imageBytes);
+        imageBase64.value = base64.encode(imageBytes);
       }
     }
   }
@@ -97,7 +98,7 @@ class DoctorFormOneController extends GetxController {
       selectedFile.value = File(returnedFile.files.single.path!);
       fileName.value = returnedFile.files.first;
       Uint8List? fileBytes = await selectedFile.value!.readAsBytes();
-      FileBase64.value = base64.encode(fileBytes);
+      fileBase64.value = base64.encode(fileBytes);
     } else {
       return;
     }
@@ -111,6 +112,8 @@ class DoctorFormOneController extends GetxController {
       _api.getUserRecord(data).then((value) {
         ///For Fields
         nameController.text = (value[0]["user_name"]);
+        name.value = (value[0]["user_name"]);
+        email.value = (value[0]["user_email"]);
         isLoading.value = false;
       });
     } catch (e) {
@@ -126,20 +129,20 @@ class DoctorFormOneController extends GetxController {
     bool? fields = isFieldEmpty();
     if (fields != false) {
       Map data = {
+        'name': name.value,
+        'email': email.value,
         'userID': userID,
-        'photo': ImageBase64.value,
+        'photo': imageBase64.value,
         'speciality': specialityController.value.text,
         'about': aboutController.value.text,
         'address': addressController.value.text,
-        'resume': FileBase64.value
+        'resume': fileBase64.value
       };
       _api.doctorFormOne(data).then((value) {
         if (value["success"] == "true") {
           Utils.toastMessage(value["message"]);
-          Get.toNamed(
-            RoutesNames.doctorPanel,
-            arguments: value["doctorID"],
-          );
+          Get.offNamedUntil(RoutesNames.interviewMsg,
+              arguments: value["doctorID"], (route) => false);
         } else {
           Utils.toastErrorMessage(value["message"]);
           if (kDebugMode) {

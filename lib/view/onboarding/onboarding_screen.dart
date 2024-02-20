@@ -5,16 +5,16 @@ import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/view/onboarding/unboarding_content.dart';
 
+import '../../res/app_urls/app_urls.dart';
+
 class OnBoarding extends StatefulWidget {
-  const OnBoarding({Key? key}) : super(key: key);
+  const OnBoarding({super.key});
 
   @override
   State<OnBoarding> createState() => _OnBoardingState();
 }
-
 class _OnBoardingState extends State<OnBoarding> {
   late PageController _pageController = PageController();
-
   int currentIndex = 0;
   @override
   void initState() {
@@ -22,26 +22,25 @@ class _OnBoardingState extends State<OnBoarding> {
     _pageController = PageController(initialPage: 0);
     super.initState();
   }
-
   @override
   void dispose() {
     // TODO: implement dispose
     _pageController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         actions: [
           GestureDetector(
             onTap: () {
-              Get.toNamed(RoutesNames.welcome);
+              Get.offNamedUntil(RoutesNames.welcome, (route) => false);
             },
             child: const Padding(
               padding: EdgeInsets.only(
-                right: 30,
+                right: 20,
               ),
               child: Align(
                 alignment: Alignment.bottomRight,
@@ -74,19 +73,19 @@ class _OnBoardingState extends State<OnBoarding> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ///Illustrations
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Image.asset(
-                        content[i].image,
+                    Expanded(
+                      child: Image.network(
+                        AppUrl.onBoardingPictures + content[i].image,
+                        fit: BoxFit.cover, // Adjust this property according to your requirement
                       ),
                     ),
                     ///Captions
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: Text(
                         content[i].caption,
                         style: const TextStyle(
-                          fontSize: 28,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -98,7 +97,7 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
           /// Dot List and Buttons
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: Row(
               children: [
                 /// Dots

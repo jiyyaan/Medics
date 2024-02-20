@@ -32,7 +32,6 @@ class LoginWithGoogleController extends GetxController {
         'user_photo_url': account.photoUrl,
       };
       _api.loginWithGoogle(data).then((value) {
-        print(value);
         Get.offNamedUntil(RoutesNames.home, (route) => false);
       }).onError((error, stackTrace) {
         print(error);

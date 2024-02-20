@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/models/booking_data.dart';
+import 'package:medics/res/app_urls/app_urls.dart';
 import 'package:medics/res/colors/app_colors.dart';
 import 'package:medics/res/components/custom_progress_indicator.dart';
 import 'package:medics/res/components/dark_button.dart';
@@ -11,18 +11,19 @@ import 'package:medics/res/components/menu_button.dart';
 import 'package:medics/res/constants/constants.dart';
 import 'package:medics/res/routes/routes_names.dart';
 import 'package:medics/utils/utils.dart';
-import 'package:medics/view_models/controller/home_controller/doctor_detail_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/doctor_detail_controller.dart';
+import 'package:medics/view_models/controller/patient_panel_controllers/home_controller.dart';
 import '../../res/components/time_table_container.dart';
 
 class DoctorDetail extends StatefulWidget {
-  const DoctorDetail({Key? key}) : super(key: key);
+  const DoctorDetail({super.key});
 
   @override
   State<DoctorDetail> createState() => _DoctorDetailState();
 }
 
 class _DoctorDetailState extends State<DoctorDetail> {
-  final DoctorDetailController controller = Get.find<DoctorDetailController>();
+  final DoctorDetailController controller = Get.put(DoctorDetailController());
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,16 @@ class _DoctorDetailState extends State<DoctorDetail> {
       appBar: AppBar(
         foregroundColor: AppColors.kwhite,
         backgroundColor: AppColors.kdarkColor,
-        title: const Text('Doctor Detail', style: TextStyle(color: AppColors.kwhite),),
+        title: const Text(
+          'Doctor Detail',
+          style: TextStyle(color: AppColors.kwhite),
+        ),
         centerTitle: true,
         actions: const [
-          MenuButton(color: AppColors.kwhite, textColor: AppColors.kblack,),
+          MenuButton(
+            color: AppColors.kwhite,
+            textColor: AppColors.kblack,
+          ),
         ],
       ),
       body: LayoutBuilder(
@@ -57,9 +64,7 @@ class _DoctorDetailState extends State<DoctorDetail> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: DoctorProfileHorizontal(
-                              imagePath: Get.find<DoctorDetailController>()
-                                  .doctorDetail[0]
-                                  .docPhoto,
+                              imagePath: NetworkImage(AppUrl.doctorPictures + controller.doctorDetail[0].docPhoto),
                               drName: Get.find<DoctorDetailController>()
                                   .doctorDetail[0]
                                   .docName,
@@ -151,7 +156,9 @@ class _DoctorDetailState extends State<DoctorDetail> {
                                   child: GestureDetector(
                                     onTap: () {
                                       controller.dateIndex.value = index;
-                                      controller.selectedDate.value = controller.datesList[index]['selectedDate'];
+                                      controller.selectedDate.value = controller
+                                          .datesList[index]['selectedDate'];
+                                      controller.fetchReservedTimeDoctors();
                                     },
                                     child: GetBuilder<DoctorDetailController>(
                                       builder: (controller) => Obx(
@@ -194,65 +201,88 @@ class _DoctorDetailState extends State<DoctorDetail> {
                           /// Time List
                           SizedBox(
                             height: 180,
-                            child: GridView.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 170,
-                                childAspectRatio: 2.8,
-                                mainAxisSpacing: 4,
-                              ),
-                              itemCount: Get.find<DoctorDetailController>()
-                                  .timeList
-                                  .length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Obx(
-                                  () {
-                                    if (int.parse(controller
-                                            .timeList[index].status) ==
-                                        1) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          controller.timeIndex.value = index;
-                                          controller.selectedTime.value =
-                                              controller.twelveHourFormat(
-                                                  controller.timeList[index]
-                                                      .timeSession);
-                                        },
-                                        child: TimeTableContainer(
-                                          timeText: controller.twelveHourFormat(
-                                            controller
-                                                .timeList[index].timeSession,
-                                          ),
-                                          bgColor: (index ==
-                                                  controller.timeIndex.value)
-                                              ? AppColors.kdarkColor
-                                              : AppColors.kwhite,
-                                          textColor: (index ==
-                                                  controller.timeIndex.value)
-                                              ? AppColors.kwhite
-                                              : AppColors.kblack,
-                                          fontWeight: (index ==
-                                                  controller.timeIndex.value)
-                                              ? FontWeight.bold
-                                              : null,
-                                          borderColor: AppColors.kdarkTeal,
-                                        ),
-                                      );
-                                    } else {
-                                      return TimeTableContainer(
-                                        timeText: controller.twelveHourFormat(
-                                          controller
-                                              .timeList[index].timeSession,
-                                        ),
-                                        bgColor: AppColors.kwhite,
-                                        textColor: AppColors.klightTeal,
-                                        borderColor: AppColors.klightTeal,
-                                      );
-                                    }
-                                  },
+                            child: Obx(() {
+                              if (controller.selectedDate.value == "") {
+                                return const Center(
+                                  child: Text(
+                                      "Select the date \n if you want to book an appointment", textAlign: TextAlign.center,),
                                 );
-                              },
-                            ),
+                              } else {
+                                if (controller.isLoading.isFalse) {
+                                  return CustomProgressIndicator(
+                                    width: width,
+                                  );
+                                } else {
+                                  return GridView.builder(
+                                    gridDelegate:
+                                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent: 170,
+                                      childAspectRatio: 2.8,
+                                      mainAxisSpacing: 4,
+                                    ),
+                                    itemCount: Get.find<DoctorDetailController>().timeList.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      bool isReserved = false;
+                                      final timeModel = controller.timeList[index];
+                                      for (final reservedModel in controller.reservedTimeList) {
+                                        if (timeModel.timeId == reservedModel.timeId) {
+                                          isReserved = true;
+                                          break;
+                                        }
+                                      }
+                                      return Obx(
+                                        () {
+                                          if (controller.reservedTimeList.isEmpty) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                controller.timeIndex.value = index;
+                                                controller.selectedTime.value =
+                                                    controller.twelveHourFormat(controller.timeList[index].timeSession);
+                                                controller.timeID.value = controller.timeList[index].timeId;
+                                              },
+                                              child: TimeTableContainer(
+                                                timeText:
+                                                    controller.twelveHourFormat(controller.timeList[index].timeSession),
+                                                bgColor: (index == controller.timeIndex.value) ? AppColors.kdarkColor : AppColors.kwhite,
+                                                textColor: (index == controller.timeIndex.value) ? AppColors.kwhite : AppColors.kblack,
+                                                fontWeight: (index == controller.timeIndex.value) ? FontWeight.bold : null,
+                                                borderColor: AppColors.kdarkTeal,
+                                              ),
+                                            );
+                                          } else {
+                                            if(isReserved == true){
+                                              return TimeTableContainer(
+                                                timeText: controller.twelveHourFormat(controller.timeList[index].timeSession),
+                                                bgColor: AppColors.kwhite,
+                                                textColor: AppColors.klightTeal,
+                                                borderColor: AppColors.klightTeal,
+                                              );
+                                            }else{
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  controller.timeIndex.value = index;
+                                                  controller.selectedTime.value =
+                                                      controller.twelveHourFormat(controller.timeList[index].timeSession);
+                                                  controller.timeID.value = controller.timeList[index].timeId;
+                                                },
+                                                child: TimeTableContainer(
+                                                  timeText:
+                                                  controller.twelveHourFormat(controller.timeList[index].timeSession),
+                                                  bgColor: (index == controller.timeIndex.value) ? AppColors.kdarkColor : AppColors.kwhite,
+                                                  textColor: (index == controller.timeIndex.value) ? AppColors.kwhite : AppColors.kblack,
+                                                  fontWeight: (index == controller.timeIndex.value) ? FontWeight.bold : null,
+                                                  borderColor: AppColors.kdarkTeal,
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        },
+                                      );
+                                    },
+                                  );
+                                }
+                              }
+                            }),
                           ),
                           const Spacer(),
                           /// Bottom Buttons
@@ -290,20 +320,22 @@ class _DoctorDetailState extends State<DoctorDetail> {
                                     function: () {
                                       BookingModel booking = BookingModel(
                                         doctorID: controller.doctorID,
+                                        timeID: controller.timeID.value,
                                         dateAppointment:
                                             controller.selectedDate.value,
                                         timeAppointment:
                                             controller.selectedTime.value,
                                       );
-                                      if (booking.dateAppointment.isEmpty){
-                                        Utils.toastErrorMessage('Please Select Date');
+                                      if (booking.dateAppointment.isEmpty) {
+                                        Utils.toastErrorMessage(
+                                            'Please Select Date');
                                         return false;
                                       }
-                                      if(booking.timeAppointment.isEmpty)
-                                      {
-                                        Utils.toastErrorMessage('Please select Time');
+                                      if (booking.timeAppointment.isEmpty) {
+                                        Utils.toastErrorMessage(
+                                            'Please select Time');
                                         return false;
-                                      }else{
+                                      } else {
                                         Get.toNamed(RoutesNames.booking,
                                             arguments: booking);
                                         return true;
@@ -318,7 +350,11 @@ class _DoctorDetailState extends State<DoctorDetail> {
                       );
                     } else {
                       return Center(
-                        child: Center(child: CustomProgressIndicator(width: width,),),
+                        child: Center(
+                          child: CustomProgressIndicator(
+                            width: width,
+                          ),
+                        ),
                       );
                     }
                   }),

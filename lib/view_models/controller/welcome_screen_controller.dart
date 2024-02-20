@@ -34,7 +34,7 @@ class WelcomeScreenController extends GetxController {
       if (authenticate == true) {
         fingerPrintActive.value = !fingerPrintActive.value;
         Future.delayed(const Duration(seconds: 2), () {
-          Get.offNamedUntil(RoutesNames.home, (route) => false);
+          Get.offNamedUntil(RoutesNames.login, (route) => false);
         });
       } else {
         goToLogin.value = !goToLogin.value;
